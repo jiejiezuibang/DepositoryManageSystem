@@ -1,0 +1,10 @@
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\Tools\bin\Debug\netcoreapp3.1\Tools.deps.json
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\Tools\bin\Debug\netcoreapp3.1\Tools.dll
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\Tools\bin\Debug\netcoreapp3.1\Tools.pdb
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\Tools\obj\Debug\netcoreapp3.1\Tools.GeneratedMSBuildEditorConfig.editorconfig
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\Tools\obj\Debug\netcoreapp3.1\Tools.AssemblyInfoInputs.cache
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\Tools\obj\Debug\netcoreapp3.1\Tools.AssemblyInfo.cs
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\Tools\obj\Debug\netcoreapp3.1\Tools.csproj.CoreCompileInputs.cache
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\Tools\obj\Debug\netcoreapp3.1\Tools.dll
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\Tools\obj\Debug\netcoreapp3.1\Tools.pdb
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\Tools\obj\Debug\netcoreapp3.1\Tools.csproj.AssemblyReference.cache

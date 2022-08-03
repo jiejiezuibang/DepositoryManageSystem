@@ -1,0 +1,13 @@
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\IDepositoryDal\bin\Debug\netcoreapp3.1\IDepositoryDal.deps.json
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\IDepositoryDal\bin\Debug\netcoreapp3.1\IDepositoryDal.dll
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\IDepositoryDal\bin\Debug\netcoreapp3.1\IDepositoryDal.pdb
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\IDepositoryDal\bin\Debug\netcoreapp3.1\Sister.dll
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\IDepositoryDal\bin\Debug\netcoreapp3.1\Sister.pdb
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\IDepositoryDal\obj\Debug\netcoreapp3.1\IDepositoryDal.csproj.AssemblyReference.cache
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\IDepositoryDal\obj\Debug\netcoreapp3.1\IDepositoryDal.GeneratedMSBuildEditorConfig.editorconfig
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\IDepositoryDal\obj\Debug\netcoreapp3.1\IDepositoryDal.AssemblyInfoInputs.cache
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\IDepositoryDal\obj\Debug\netcoreapp3.1\IDepositoryDal.AssemblyInfo.cs
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\IDepositoryDal\obj\Debug\netcoreapp3.1\IDepositoryDal.csproj.CoreCompileInputs.cache
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\IDepositoryDal\obj\Debug\netcoreapp3.1\IDepositoryDal.csproj.CopyComplete
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\IDepositoryDal\obj\Debug\netcoreapp3.1\IDepositoryDal.dll
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\IDepositoryDal\obj\Debug\netcoreapp3.1\IDepositoryDal.pdb

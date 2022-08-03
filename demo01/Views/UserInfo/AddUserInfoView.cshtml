@@ -1,0 +1,128 @@
+﻿@{ Layout = null;}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../layuimini/lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuimini/css/public.css" media="all">
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="layui-form layuimini-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label required">账号</label>
+            <div class="layui-input-block">
+                <input type="text" name="Account" lay-verify="required" lay-reqtext="账号不能为空" placeholder="请输入账号" value="" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">用户名</label>
+            <div class="layui-input-block">
+                <input type="text" name="UserName" lay-verify="required" lay-reqtext="用户名不能为空" placeholder="请输入用户名" value="" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">密码</label>
+            <div class="layui-input-block">
+                <input type="password" name="PassWord" lay-verify="required" lay-reqtext="密码不能为空" placeholder="请输入密码" value="" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">确认密码</label>
+            <div class="layui-input-block">
+                <input type="password" name="TwoPassWord" lay-verify="required" lay-reqtext="确认密码不能为空" placeholder="请输入确认密码" value="" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">性别</label>
+            <div class="layui-input-block">
+                <input type="radio" name="Sex" value=1 title="男" checked="">
+                <input type="radio" name="Sex" value=0 title="女">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">手机</label>
+            <div class="layui-input-block">
+                <input type="number" name="PhoneNum" placeholder="请输入手机" value="" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">邮箱</label>
+            <div class="layui-input-block">
+                <input type="email" name="Email" placeholder="请输入邮箱" value="" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">部门</label>
+            <div class="layui-input-block">
+                <select name="DepartmentId" id="Department" lay-verify="required"></select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否管理员</label>
+            <div class="layui-input-block">
+                <select name="IsAdmin" lay-verify="required">
+                    <option value="true">是</option>
+                    <option value="false">否</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
+            </div>
+        </div>
+    </div>
+    <script src="../layuimini/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+    <script>
+        layui.use(['form'], function () {
+            var form = layui.form,
+                layer = layui.layer,
+                $ = layui.$;
+
+            // 渲染部门下拉框
+            $.ajax({
+                url: '/DepartmentInfo/GetDepartmentInfo',
+                type: 'get',
+                success: function (res) {
+                    // 使用循环遍历，给下拉列表赋值
+                    $.each(res.data, function (index, value) {
+                        // 向下拉框添加元素
+                        $("#Department").append(new Option(value.departmentName, value.id))
+                    });
+                    layui.form.render("select"); // 重新渲染，固定写法
+                }
+            })
+
+            //监听提交
+            form.on('submit(saveBtn)', function (data) {
+                $.ajax({
+                    url: '/UserInfo/AddUserInfo',
+                    type: 'post',
+                    data: data.field,
+                    success: function (res) {
+                        if (res.code == 200) {
+                            // 销毁弹出层
+                            var iframeIndex = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(iframeIndex);
+                        } else {
+                            layer.alert(res.msg)
+                        }
+                    }
+                })
+                return false;
+            });
+
+        });</script>
+</body>
+</html>
