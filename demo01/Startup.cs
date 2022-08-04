@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Sister;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,10 @@ namespace demo01
         }
         private static IServiceCollection AddICustomIOC(IServiceCollection services)
         {
+            // 注入数据库上下文对象
+            services.AddScoped<DepositoryContext>();
+            // 注入md5加密服务
+            services.AddScoped<MD5Encrypt>();
             // 注入用户管理dal层服务
             services.AddScoped<IUserInfoDal, UserInfoDal>();
             // 注入用户管理bll层服务

@@ -14,6 +14,12 @@ namespace DAL
     /// </summary>
     public class DepartmentInfoDal: IDepartmentInfoDal
     {
+        // 注入数据库上下文对象
+        private readonly DepositoryContext _depositoryContext1;
+        public DepartmentInfoDal(DepositoryContext depositoryContext)
+        {
+            this._depositoryContext1 = depositoryContext;
+        }
         public Task<bool> AddAsync(DepartmentInfo t)
         {
             throw new NotImplementedException();
@@ -34,9 +40,7 @@ namespace DAL
         /// <returns></returns>
         public DbSet<DepartmentInfo> GetAll()
         {
-            // 创建上下文对象
-            DepositoryContext depositoryContext = new DepositoryContext();
-            return depositoryContext.DepartmentInfos;
+            return _depositoryContext1.DepartmentInfos;
         }
 
         public Task<DepartmentInfo> GetAsync(string Id)

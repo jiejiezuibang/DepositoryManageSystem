@@ -14,8 +14,16 @@ namespace IDepositoryDal
         Task<bool> DelAsync(string[] Id);
         // 改
         Task<bool> EditAsync(T t);
+        /// <summary>
+        /// 查询全部
+        /// </summary>
+        /// <returns></returns>
         DbSet<T> GetAll();
-        // 查
+        /// <summary>
+        /// 根据id查询
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         Task<T> GetAsync(string Id);
     }
 }

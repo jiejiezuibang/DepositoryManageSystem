@@ -1,4 +1,5 @@
-﻿using IDepositoryDal;
+﻿using Common.ResultEnums;
+using IDepositoryDal;
 using Sister;
 using System;
 using System.Collections.Generic;
@@ -24,43 +25,67 @@ namespace BLL
         /// <param name="password"></param>
         /// <param name="msg"></param>
         /// <returns></returns>
-        public bool DoLogin(string account,string password,out string msg,out string UserName,out string Account)
+        public AccoutnLoginEnums DoLogin(string account,string password,out string UserName,out string Account)
         {
             // 校验前端传递的值是否为空
             if (account == null)
             {
-                msg = "账号不能为空";
                 UserName = null;
                 Account = null;
-                return false;
+                return AccoutnLoginEnums.accountIsNull;
             }
             if (password == null)
             {
-                msg = "密码不能为空";
                 UserName = null;
                 Account = null;
-                return false;
+                return AccoutnLoginEnums.PwdIsNull;
             }
             // 通过account查询用户
             UserInfo userInfo = _userInfoDal.GetAll().FirstOrDefault(u => u.Account == account);
             if(userInfo == null)
             {
-                msg = "该账号不存在";
                 UserName = null;
                 Account = null;
-                return false;
+                return AccoutnLoginEnums.accountNotExist;
             }
             if (userInfo.PassWord.Equals(mD5Encrypt.StartEncrypy(password)))
             {
-                msg = "登录成功";
                 UserName = userInfo.UserName;
                 Account = userInfo.Account;
-                return true;
+                return AccoutnLoginEnums.loginSuccess;
             }
-            msg = "登录失败，密码错误";
-            UserName = null;
-            Account = null;
-            return false;
+            else
+            {
+                UserName = null;
+                Account = null;
+                return AccoutnLoginEnums.PwdError;
+            }
+        }
+        /// <summary>
+        /// 重置用户密码业务
+        /// </summary>
+        public AccoutnLoginEnums ResetPwdBll(string oldPwd, string newPwd, string verifyPwd,string account)
+        {
+            // 通过account查询用户
+            UserInfo userInfo = _userInfoDal.GetAll().FirstOrDefault(u => u.Account == account);
+            // 判断用户输入的旧密码是否正确
+            if (userInfo.PassWord.Equals(mD5Encrypt.StartEncrypy(oldPwd)))
+            {
+                // 判断用户输入的新密码和确认密码是否相同
+                if (newPwd.Equals(verifyPwd))
+                {
+                    // 给用户赋值新密码
+                    userInfo.PassWord = mD5Encrypt.StartEncrypy(newPwd);
+                    // 修改密码操作
+                    _userInfoDal.EditAsync(userInfo);
+                    return AccoutnLoginEnums.ResetPwdSuccess;
+                }
+                else
+                {
+                    return AccoutnLoginEnums.TwoPwdError;
+                }
+            }
+            return AccoutnLoginEnums.PwdError;
         }
     }
 }

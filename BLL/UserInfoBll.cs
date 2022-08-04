@@ -17,9 +17,12 @@ namespace BLL
     {
         // 注入操作用户信息数据对象
         private readonly IUserInfoDal _userInfoDal;
-        public UserInfoBll(IUserInfoDal userInfoDal)
+        // 注入md5加密对象
+        private readonly MD5Encrypt _mD5Encrypt1;
+        public UserInfoBll(IUserInfoDal userInfoDal,MD5Encrypt mD5Encrypt)
         {
             this._userInfoDal = userInfoDal;
+            this._mD5Encrypt1 = mD5Encrypt;
         }
 
         /// <summary>
@@ -140,14 +143,14 @@ namespace BLL
             {
                 // 根据account查询用户信息
                 UserInfo userob = _userInfoDal.GetAll().FirstOrDefault(u => u.Account == addUserInfoDto.Account);
+                // 判断账号是否存在
                 if(userob != null)
                 {
                     msg = "该账号以存在";
                     return false;
                 }
-                MD5Encrypt mD5Encrypt = new MD5Encrypt();
                 // 对要添加到数据的密码进行加密
-                addUserInfoDto.PassWord = mD5Encrypt.StartEncrypy(addUserInfoDto.PassWord);
+                addUserInfoDto.PassWord = _mD5Encrypt1.StartEncrypy(addUserInfoDto.PassWord);
                 // 创建用户信息对象赋值
                 UserInfo userInfo = new UserInfo()
                 {
@@ -180,7 +183,7 @@ namespace BLL
         /// <summary>
         /// 根据Id查询对应用户信息业务
         /// </summary>
-        /// <param name="Id"></param>
+        /// <param name="Id">用户编号</param>
         /// <returns></returns>
         public async Task<UserInfo> FindIdUserInfo(string Id)
         {
