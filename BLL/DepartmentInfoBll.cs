@@ -1,4 +1,5 @@
 ﻿using DAL;
+using IDepositoryBll;
 using IDepositoryDal;
 using Sister;
 using System;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace BLL
 {
-    public class DepartmentInfoBll
+    public class DepartmentInfoBll: IDepartmentInfoBll
     {
         // 注入部门管理dal
         private readonly IDepartmentInfoDal _departmentInfoDal;

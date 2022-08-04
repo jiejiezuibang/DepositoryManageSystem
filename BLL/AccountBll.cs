@@ -1,4 +1,5 @@
 ﻿using Common.ResultEnums;
+using IDepositoryBll;
 using IDepositoryDal;
 using Sister;
 using System;
@@ -9,7 +10,7 @@ using Tools;
 
 namespace BLL
 {
-    public class AccountBll
+    public class AccountBll:IAccountBll
     {
         // 注入用户管理dal
         private readonly IUserInfoDal _userInfoDal;

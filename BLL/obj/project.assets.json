@@ -1873,6 +1873,20 @@
           "bin/placeholder/DAL.dll": {}
         }
       },
+      "IDepositoryBll/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Common": "1.0.0",
+          "Sister": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/IDepositoryBll.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/IDepositoryBll.dll": {}
+        }
+      },
       "IDepositoryDal/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -6574,6 +6588,11 @@
       "path": "../DAL/DAL.csproj",
       "msbuildProject": "../DAL/DAL.csproj"
     },
+    "IDepositoryBll/1.0.0": {
+      "type": "project",
+      "path": "../IDepositoryBll/IDepositoryBll.csproj",
+      "msbuildProject": "../IDepositoryBll/IDepositoryBll.csproj"
+    },
     "IDepositoryDal/1.0.0": {
       "type": "project",
       "path": "../IDepositoryDal/IDepositoryDal.csproj",
@@ -6588,7 +6607,8 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "Common >= 1.0.0",
-      "DAL >= 1.0.0"
+      "DAL >= 1.0.0",
+      "IDepositoryBll >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -6625,6 +6645,9 @@
           "projectReferences": {
             "G:\\20级水电.NET开发一班覃坤\\实训项目\\demo\\demo01\\DAL\\DAL.csproj": {
               "projectPath": "G:\\20级水电.NET开发一班覃坤\\实训项目\\demo\\demo01\\DAL\\DAL.csproj"
+            },
+            "G:\\20级水电.NET开发一班覃坤\\实训项目\\demo\\demo01\\IDepositoryBll\\IDepositoryBll.csproj": {
+              "projectPath": "G:\\20级水电.NET开发一班覃坤\\实训项目\\demo\\demo01\\IDepositoryBll\\IDepositoryBll.csproj"
             },
             "G:\\20级水电.NET开发一班覃坤\\实训项目\\demo\\demo01\\Tools\\Common.csproj": {
               "projectPath": "G:\\20级水电.NET开发一班覃坤\\实训项目\\demo\\demo01\\Tools\\Common.csproj"

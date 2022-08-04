@@ -1,4 +1,5 @@
 ﻿using BLL;
+using IDepositoryBll;
 using Microsoft.AspNetCore.Mvc;
 using Sister;
 using Sister.Dtos.UserInfo;
@@ -14,9 +15,9 @@ namespace demo01.Controllers
 {
     public class UserInfoController : Controller
     {
-        // 注入用户管理bll对象
-        public readonly UserInfoBll _userInfoBll;
-        public UserInfoController(UserInfoBll userInfoBll)
+        // 注入用户管理bll业务对象
+        public readonly IUserInfoBll _userInfoBll;
+        public UserInfoController(IUserInfoBll userInfoBll)
         {
             this._userInfoBll = userInfoBll;
         }

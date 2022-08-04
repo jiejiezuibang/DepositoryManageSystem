@@ -1,5 +1,6 @@
 ﻿using BLL;
 using Common.ResultEnums;
+using IDepositoryBll;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Sister.Tools;
@@ -13,8 +14,8 @@ namespace DepositoryServer.Controllers
     public class AccountController : Controller
     {
         // 注入登录bll服务
-        private readonly AccountBll _accountBll;
-        public AccountController(AccountBll accountBll)
+        private readonly IAccountBll _accountBll;
+        public AccountController(IAccountBll accountBll)
         {
             this._accountBll = accountBll;
         }
@@ -38,8 +39,8 @@ namespace DepositoryServer.Controllers
         /// <summary>
         /// 登录操作
         /// </summary>
-        /// <param name="account"></param>
-        /// <param name="password"></param>
+        /// <param name="account">账号</param>
+        /// <param name="password">密码</param>
         /// <returns></returns>
         public IActionResult AccountLogin(string account,string password)
         {
@@ -70,6 +71,13 @@ namespace DepositoryServer.Controllers
             }
             return Json(ajaxResult);
         }
+        /// <summary>
+        /// 用户重置密码
+        /// </summary>
+        /// <param name="oldPwd">旧密码</param>
+        /// <param name="newPwd">新密码</param>
+        /// <param name="verifyPwd">确认密码</param>
+        /// <returns></returns>
         public IActionResult ResetPwd(string oldPwd,string newPwd,string verifyPwd)
         {
             AjaxResult ajaxResult = new AjaxResult();
@@ -96,6 +104,7 @@ namespace DepositoryServer.Controllers
         /// <returns></returns>
         public IActionResult OutAccountLogin()
         {
+            // 清除指定的session
             HttpContext.Session.Remove("account");
             return Json(new AjaxResult
             {

@@ -9,7 +9,8 @@
       "BLL/1.0.0": {
         "dependencies": {
           "Common": "1.0.0",
-          "DAL": "1.0.0"
+          "DAL": "1.0.0",
+          "IDepositoryBll": "1.0.0"
         },
         "runtime": {
           "BLL.dll": {}
@@ -1375,6 +1376,15 @@
           "DAL.dll": {}
         }
       },
+      "IDepositoryBll/1.0.0": {
+        "dependencies": {
+          "Common": "1.0.0",
+          "Sister": "1.0.0"
+        },
+        "runtime": {
+          "IDepositoryBll.dll": {}
+        }
+      },
       "IDepositoryDal/1.0.0": {
         "dependencies": {
           "Sister": "1.0.0"
@@ -2246,6 +2256,11 @@
       "sha512": ""
     },
     "DAL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "IDepositoryBll/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

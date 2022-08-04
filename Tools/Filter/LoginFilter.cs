@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections;
@@ -7,19 +8,34 @@ using System.Text;
 
 namespace Common.Filter
 {
-    public class LoginFilter:ActionFilterAttribute
+    /// <summary>
+    /// 方法过滤器
+    /// </summary>
+    public class LoginFilter:IActionFilter
     {
-        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        /// <summary>
+        /// 过滤器结束后调用
+        /// </summary>
+        /// <param name="context"></param>
+        public void OnActionExecuted(ActionExecutedContext context)
+        {
+            
+        }
+        /// <summary>
+        /// 执行方法前调用
+        /// </summary>
+        /// <param name="context"></param>
+        public void OnActionExecuting(ActionExecutingContext context)
         {
             // 不需要校验的接口
             ArrayList list = new ArrayList() { "/", "/Account/LoginView", "/Account/AccountLogin" };
-            if (!list.Contains(filterContext.HttpContext.Request.Path.ToString()))
+            if (!list.Contains(context.HttpContext.Request.Path.ToString()))
             {
                 // 校验是否存在session
-                if (filterContext.HttpContext.Session.GetString("account") == null)
+                if (context.HttpContext.Session.GetString("account") == null)
                 {
                     // 重定向到登录界面
-                    filterContext.HttpContext.Response.Redirect("/Account/LoginView");
+                    context.Result = new RedirectResult("/Account/LoginView");
                 }
             }
         }

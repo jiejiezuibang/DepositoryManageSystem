@@ -1,4 +1,5 @@
 ﻿using DAL;
+using IDepositoryBll;
 using IDepositoryDal;
 using Sister;
 using Sister.Dtos.UserInfo;
@@ -13,7 +14,7 @@ using Tools;
 
 namespace BLL
 {
-    public class UserInfoBll
+    public class UserInfoBll: IUserInfoBll
     {
         // 注入操作用户信息数据对象
         private readonly IUserInfoDal _userInfoDal;

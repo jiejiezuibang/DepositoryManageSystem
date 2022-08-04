@@ -1,6 +1,7 @@
 using BLL;
 using Common.Filter;
 using DAL;
+using IDepositoryBll;
 using IDepositoryDal;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -48,13 +49,13 @@ namespace demo01
             // 注入用户管理dal层服务
             services.AddScoped<IUserInfoDal, UserInfoDal>();
             // 注入用户管理bll层服务
-            services.AddScoped<UserInfoBll>();
+            services.AddScoped<IUserInfoBll,UserInfoBll>();
             // 注入部门管理dal层服务
             services.AddScoped<IDepartmentInfoDal, DepartmentInfoDal>();
             // 注入部门管理bll层服务
-            services.AddScoped<DepartmentInfoBll>();
+            services.AddScoped<IDepartmentInfoBll, DepartmentInfoBll>();
             // 注入登录bll服务
-            services.AddScoped<AccountBll>();
+            services.AddScoped<IAccountBll,AccountBll>();
             return services;
         }
 

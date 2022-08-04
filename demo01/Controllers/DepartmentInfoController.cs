@@ -1,4 +1,5 @@
 ﻿using BLL;
+using IDepositoryBll;
 using Microsoft.AspNetCore.Mvc;
 using Sister.Tools;
 using System;
@@ -10,8 +11,9 @@ namespace DepositoryServer.Controllers
 {
     public class DepartmentInfoController : Controller
     {
-        private readonly DepartmentInfoBll _departmentInfoBll;
-        public DepartmentInfoController(DepartmentInfoBll departmentInfoBll)
+        // 注入部门管理bll层业务对象
+        private readonly IDepartmentInfoBll _departmentInfoBll;
+        public DepartmentInfoController(IDepartmentInfoBll departmentInfoBll)
         {
             this._departmentInfoBll = departmentInfoBll;
         }
