@@ -1,4 +1,5 @@
 ﻿using BLL;
+using Common.Filter;
 using Common.ResultEnums;
 using IDepositoryBll;
 using Microsoft.AspNetCore.Http;
@@ -42,6 +43,7 @@ namespace DepositoryServer.Controllers
         /// <param name="account">账号</param>
         /// <param name="password">密码</param>
         /// <returns></returns>
+        [HttpPost]
         public IActionResult AccountLogin(string account,string password)
         {
             AjaxResult ajaxResult = new AjaxResult();

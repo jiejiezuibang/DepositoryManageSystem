@@ -5,6 +5,7 @@ using IDepositoryBll;
 using IDepositoryDal;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -32,6 +33,9 @@ namespace demo01
             services.AddControllersWithViews();
             // 注入session服务
             services.AddSession();
+            // 注入数据库上下文对象
+            services.AddDbContext<DepositoryContext>(options =>
+    options.UseSqlServer(Configuration.GetConnectionString("MvcMovieContext")));
             // 注册全局过滤器（登录校验用）
             services.AddMvc(options =>
             {
@@ -42,8 +46,7 @@ namespace demo01
         }
         private static IServiceCollection AddICustomIOC(IServiceCollection services)
         {
-            // 注入数据库上下文对象
-            services.AddScoped<DepositoryContext>();
+            
             // 注入md5加密服务
             services.AddScoped<MD5Encrypt>();
             // 注入用户管理dal层服务

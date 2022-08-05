@@ -38,6 +38,7 @@ namespace Common.Filter
                     context.Result = new RedirectResult("/Account/LoginView");
                 }
             }
+
         }
     }
 }
