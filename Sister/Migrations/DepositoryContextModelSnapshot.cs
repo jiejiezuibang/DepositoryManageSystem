@@ -24,11 +24,11 @@ namespace Sister.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("varchar(36)");
 
-                    b.Property<string>("CreateTime")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("DeleteTime")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("DeleteTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("DepartmentName")
                         .HasColumnType("nvarchar(16)");
@@ -36,8 +36,8 @@ namespace Sister.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(32)");
 
-                    b.Property<string>("IsDelete")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LeaderId")
                         .HasColumnType("varchar(36)");

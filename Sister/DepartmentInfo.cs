@@ -40,16 +40,16 @@ namespace Sister
         /// <summary>
         /// 创建时间
         /// </summary>
-        public string CreateTime { get; set; }
+        public DateTime CreateTime { get; set; }
 
         /// <summary>
         /// 是否删除 
         /// </summary>
-        public string IsDelete { get; set; }
+        public bool IsDelete { get; set; }
 
         /// <summary>
         /// 删除时间
         /// </summary>
-        public string DeleteTime { get; set; }
+        public DateTime DeleteTime { get; set; }
     }
 }
