@@ -396,3 +396,6 @@ G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\bin\Debug\n
 G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\Razor\Views\Department\DepartmentIndex.cshtml.g.cs
 G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\Razor\Views\Department\AddDeparmentInfoView.cshtml.g.cs
 G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\Razor\Views\Department\EditDeprtmentInfoView.cshtml.g.cs
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\Razor\Views\RoleInfo\RoleInfoView.cshtml.g.cs
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\Razor\Views\RoleInfo\AddRoleInfoView.cshtml.g.cs
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\Razor\Views\RoleInfo\EditRoleInfoView.cshtml.g.cs

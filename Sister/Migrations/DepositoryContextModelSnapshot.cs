@@ -50,6 +50,31 @@ namespace Sister.Migrations
                     b.ToTable("DepartmentInfos");
                 });
 
+            modelBuilder.Entity("Sister.RoleInfo", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DeleteTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(32)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("RoleName")
+                        .HasColumnType("nvarchar(16)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RoleInfos");
+                });
+
             modelBuilder.Entity("Sister.UserInfo", b =>
                 {
                     b.Property<string>("Id")

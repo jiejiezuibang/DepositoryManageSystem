@@ -5,16 +5,8 @@ using System.Threading.Tasks;
 
 namespace Sister.Dtos.UserInfo
 {
-    public class FindUserInfoDto
+    public class FindUserInfoDto: Pagination
     {
-        /// <summary>
-        /// 当前页码
-        /// </summary>
-        public int page { get; set; }
-        /// <summary>
-        /// 每页数据量
-        /// </summary>
-        public int limit { get; set; }
         /// <summary>
         /// 用户账号
         /// </summary>

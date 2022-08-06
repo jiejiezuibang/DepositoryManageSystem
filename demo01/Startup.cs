@@ -37,10 +37,10 @@ namespace demo01
             services.AddDbContext<DepositoryContext>(options =>
     options.UseSqlServer(Configuration.GetConnectionString("MvcMovieContext")));
             // 注册全局过滤器（登录校验用）
-            services.AddMvc(options =>
-            {
-                options.Filters.Add(typeof(LoginFilter));
-            });
+            //services.AddMvc(options =>
+            //{
+            //    options.Filters.Add(typeof(LoginFilter));
+            //});
             // 注入仓储层和业务层服务
             AddICustomIOC(services);
         }
@@ -59,6 +59,10 @@ namespace demo01
             services.AddScoped<IDepartmentInfoBll, DepartmentInfoBll>();
             // 注入登录bll服务
             services.AddScoped<IAccountBll,AccountBll>();
+            // 注入角色管理dal服务
+            services.AddScoped<IRoleInfoDal, RoleInfoDal>();
+            // 注入角色管理bll服务
+            services.AddScoped<IRoleInfoBll, RoleInfoBll>();
             return services;
         }
 

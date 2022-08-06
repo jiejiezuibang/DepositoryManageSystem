@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Common.ResultEnums
 {
+    /// <summary>
+    /// 部门管理板块枚举
+    /// </summary>
     public enum DeparmentEnums
     {
         /// <summary>
