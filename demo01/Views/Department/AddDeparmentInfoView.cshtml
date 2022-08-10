@@ -27,13 +27,17 @@
         <div class="layui-form-item">
             <label class="layui-form-label required">主管</label>
             <div class="layui-input-block">
-                <input type="text" name="LeaderId" lay-verify="required" lay-reqtext="主管不能为空" placeholder="请输入主管" value="" class="layui-input">
+                <select name="LeaderId" id="Leader">
+                    <option value=""></option>
+                </select>
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label required">父部门</label>
             <div class="layui-input-block">
-                <input type="text" name="ParentId" lay-verify="required" lay-reqtext="父部门不能为空" placeholder="请输入父部门" value="" class="layui-input">
+                <select name="ParentId" id="Parent">
+                    <option value=""></option>
+                </select>
             </div>
         </div>
         <div class="layui-form-item">
@@ -54,6 +58,25 @@
             var form = layui.form,
                 layer = layui.layer,
                 $ = layui.$;
+            // 渲染下拉框
+            $.ajax({
+                url: '/Department/GetSelectOptions',
+                type: 'get',
+                success: function (res) {
+                    console.log(res.data.userSelectOptions)
+                    // 循环渲染下拉框数据
+                    $.each(res.data.userSelectOptions, function (index, data) {
+                        // 主管
+                        $("#Leader").append(new Option(data.title,data.value))
+                    })
+                    $.each(res.data.departmentSelectOptions, function (index, data) {
+                        // 父部门
+                        $("#Parent").append(new Option(data.title, data.value))
+                    })
+                    // 重新渲染select 固定写法
+                    layui.form.render("select");
+                }
+            })
 
             //监听提交
             form.on('submit(saveBtn)', function (data) {

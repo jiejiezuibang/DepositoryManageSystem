@@ -50,6 +50,40 @@ namespace Sister.Migrations
                     b.ToTable("DepartmentInfos");
                 });
 
+            modelBuilder.Entity("Sister.FileInfo", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreateTime")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Creator")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Extension")
+                        .HasColumnType("varchar(12)");
+
+                    b.Property<string>("Length")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NewFileName")
+                        .HasColumnType("nvarchar(32)");
+
+                    b.Property<string>("OldFileName")
+                        .HasColumnType("nvarchar(32)");
+
+                    b.Property<string>("RelationId")
+                        .HasColumnType("varchar(36)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FileInfos");
+                });
+
             modelBuilder.Entity("Sister.RoleInfo", b =>
                 {
                     b.Property<string>("Id")

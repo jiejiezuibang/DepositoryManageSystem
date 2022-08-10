@@ -1,4 +1,5 @@
-﻿using Sister;
+﻿using Common.ResultEnums;
+using Sister;
 using Sister.Dtos.UserInfo;
 using Sister.Tools;
 using System;
@@ -56,6 +57,22 @@ namespace IDepositoryBll
         /// <param name="editUserInfoDto"></param>
         /// <returns></returns>
         Task<bool> UdpateUserInfo(EditUserInfoDto editUserInfoDto);
-
+        /// <summary>
+        /// 获取用户id和名称作为下拉框数据
+        /// </summary>
+        /// <returns></returns>
+        List<SelectOptionsDto> GetSelectInfoBll();
+        /// <summary>
+        /// 修改用户基本资料业务
+        /// </summary>
+        /// <param name="editUserBaseInfo">修改用户基本信息dto</param>
+        /// <returns></returns>
+        Task<UserInfoEnums> UpdateUserBaseInfo(EditUserBaseInfoDto editUserBaseInfo);
+        /// <summary>
+        /// 校验修改用户基本数据
+        /// </summary>
+        /// <param name="editUserBaseInfoDto">修改用户基本信息dto</param>
+        /// <returns></returns>
+        UserInfoEnums EditUserBaseInfoCheck(EditUserBaseInfoDto editUserBaseInfoDto);
     }
 }

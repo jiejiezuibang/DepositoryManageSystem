@@ -5,6 +5,7 @@ using IDepositoryDal;
 using Microsoft.EntityFrameworkCore;
 using Sister;
 using Sister.Dtos.DeparmentInfo;
+using Sister.Dtos.UserInfo;
 using Sister.Tools;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,12 @@ namespace BLL
     {
         // 注入部门管理dal
         private readonly IDepartmentInfoDal _departmentInfoDal;
-        public DepartmentInfoBll(IDepartmentInfoDal departmentInfoDal)
+        // 注入用户管理dal
+        private readonly IUserInfoDal _userInfoDal;
+        public DepartmentInfoBll(IDepartmentInfoDal departmentInfoDal,IUserInfoDal userInfoDal)
         {
             this._departmentInfoDal = departmentInfoDal;
+            this._userInfoDal = userInfoDal;
         }
         /// <summary>
         /// 获取全部部门表信息
@@ -49,16 +53,26 @@ namespace BLL
         {
             // 获取部门数据集
             DbSet<DepartmentInfo> departmentInfos = _departmentInfoDal.GetAll();
+            // 获取用户数据集
+            DbSet<UserInfo> userInfos = _userInfoDal.GetAll();
             var deparmentInfoDtos = from a in departmentInfos
            .Where(d => !d.IsDelete)    // 过滤已删除的部门
            .OrderByDescending(d => d.CreateTime)   // 降序排序
+           join b in userInfos
+           on a.LeaderId equals b.Id
+           into JoinAB
+           from tempAB in JoinAB.DefaultIfEmpty() 
+           join c in departmentInfos.Where(d => !d.IsDelete)
+           on a.ParentId equals c.Id
+           into JoinAC 
+           from tempAc in JoinAC.DefaultIfEmpty()
                                     select new DeparmentInfoDto
                                     {
                                         Id = a.Id,
                                         Description = a.Description,
                                         DepartmentName = a.DepartmentName,
-                                        LeaderId = a.LeaderId,
-                                        ParentId = a.ParentId,
+                                        LeaderName = tempAB.UserName,
+                                        ParentName = tempAc.DepartmentName,
                                         CreateTime = a.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")
                                     };
             DeparmentCount = deparmentInfoDtos.Count();
@@ -165,6 +179,14 @@ namespace BLL
                 return DeparmentEnums.DelDeparmentSuccess;
             }
             return DeparmentEnums.DelDeparmentError;
+        }
+        /// <summary>
+        /// 获取部门信息作为下拉框数据
+        /// </summary>
+        /// <returns></returns>
+        public List<SelectOptionsDto> GetSelectOptions()
+        {
+            return _departmentInfoDal.GetAll().Select(d => new SelectOptionsDto { Title = d.DepartmentName, Value = d.Id }).ToList();
         }
     }
 }

@@ -48,7 +48,7 @@ namespace DepositoryServer.Controllers
         {
             AjaxResult ajaxResult = new AjaxResult();
             // 判断是否登录成功
-            switch(_accountBll.DoLogin(account, password,out string UserName, out string Account))
+            switch(_accountBll.DoLogin(account, password,out string UserName, out string Account,out string Id))
             {
                 case AccoutnLoginEnums.accountIsNull:
                     ajaxResult.msg = "账号不能为空";
@@ -67,7 +67,7 @@ namespace DepositoryServer.Controllers
                     HttpContext.Session.SetString("account", Account);
                     ajaxResult.code = 200;
                     ajaxResult.msg = "登录成功";
-                    ajaxResult.data = UserName;
+                    ajaxResult.data = new { UserName,Id};
                     break;
                     
             }

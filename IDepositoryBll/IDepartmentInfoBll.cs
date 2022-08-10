@@ -1,6 +1,7 @@
 ﻿using Common.ResultEnums;
 using Sister;
 using Sister.Dtos.DeparmentInfo;
+using Sister.Dtos.UserInfo;
 using Sister.Tools;
 using System;
 using System.Collections.Generic;
@@ -60,5 +61,10 @@ namespace IDepositoryBll
         /// </summary>
         /// <param name="editDeparmentInfoDto">修改部门信息dto</param>
         AjaxResult EditDeparmentDataCheck(EditDeparmentInfoDto editDeparmentInfoDto);
+        /// <summary>
+        /// 获取部门信息作为下拉框的数据
+        /// </summary>
+        /// <returns></returns>
+        List<SelectOptionsDto> GetSelectOptions();
     }
 }

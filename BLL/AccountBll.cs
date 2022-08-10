@@ -26,19 +26,21 @@ namespace BLL
         /// <param name="password"></param>
         /// <param name="msg"></param>
         /// <returns></returns>
-        public AccoutnLoginEnums DoLogin(string account,string password,out string UserName,out string Account)
+        public AccoutnLoginEnums DoLogin(string account,string password,out string UserName,out string Account,out string Id)
         {
             // 校验前端传递的值是否为空
             if (account == null)
             {
                 UserName = null;
                 Account = null;
+                Id = null;
                 return AccoutnLoginEnums.accountIsNull;
             }
             if (password == null)
             {
                 UserName = null;
                 Account = null;
+                Id = null;
                 return AccoutnLoginEnums.PwdIsNull;
             }
             // 通过account查询用户
@@ -47,18 +49,21 @@ namespace BLL
             {
                 UserName = null;
                 Account = null;
+                Id = null;
                 return AccoutnLoginEnums.accountNotExist;
             }
             if (userInfo.PassWord.Equals(mD5Encrypt.StartEncrypy(password)))
             {
                 UserName = userInfo.UserName;
                 Account = userInfo.Account;
+                Id = userInfo.Id;
                 return AccoutnLoginEnums.loginSuccess;
             }
             else
             {
                 UserName = null;
                 Account = null;
+                Id = null;
                 return AccoutnLoginEnums.PwdError;
             }
         }

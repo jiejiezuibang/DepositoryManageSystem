@@ -3,6 +3,7 @@ using Common.ResultEnums;
 using IDepositoryBll;
 using Microsoft.AspNetCore.Mvc;
 using Sister.Dtos.DeparmentInfo;
+using Sister.Dtos.UserInfo;
 using Sister.Tools;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,12 @@ namespace DepositoryServer.Controllers
     {
         // 注入部门管理bll层业务对象
         private readonly IDepartmentInfoBll _departmentInfoBll;
-        public DepartmentController(IDepartmentInfoBll departmentInfoBll)
+        // 注入用户管理Bll层业务对象
+        private readonly IUserInfoBll _userInfoBll;
+        public DepartmentController(IDepartmentInfoBll departmentInfoBll,IUserInfoBll userInfoBll)
         {
             this._departmentInfoBll = departmentInfoBll;
+            this._userInfoBll = userInfoBll;
         }
         /// <summary>
         /// 展示部门管理主页面接口
@@ -190,6 +194,26 @@ namespace DepositoryServer.Controllers
                     ajaxResult.msg = "删除部门信息失败，服务器发生异常";
                     break;
             }
+            return Json(ajaxResult);
+        }
+        /// <summary>
+        /// 获取下拉框数据接口
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult GetSelectOptions()
+        {
+            AjaxResult ajaxResult = new AjaxResult();
+            // 获取到用户信息作为下拉框的数据
+            List<SelectOptionsDto> userSelectOptions = _userInfoBll.GetSelectInfoBll();
+            // 获取到部门信息作为下拉框的数据
+            List<SelectOptionsDto> departmentSelectOptions = _departmentInfoBll.GetSelectOptions();
+            ajaxResult.code = 200;
+            ajaxResult.msg = "获取下拉框数据成功";
+            ajaxResult.data = new
+            {
+                userSelectOptions,
+                departmentSelectOptions
+            };
             return Json(ajaxResult);
         }
     }

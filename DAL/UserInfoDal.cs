@@ -20,44 +20,6 @@ namespace DAL
             this._depositoryContext = depositoryContext;
         }
         /// <summary>
-        /// 获取用户信息
-        /// </summary>
-        /// <param name="findUserInfoDto">要查询的用户条件与分页条件</param>
-        /// <returns></returns>
-        public List<UserInfoDto> GetUserInfo(FindUserInfoDto findUserInfoDto, out int userInfoCoutn)
-        {
-            var userInfoList = (from a in _depositoryContext.UserInfos
-                                    .Where(a => a.IsDelete == false)
-                                join b in _depositoryContext.DepartmentInfos // 连表
-                                on a.DepartmentId equals b.Id
-                                select new UserInfoDto
-                                {
-                                    Id = a.Id,
-                                    Account = a.Account,
-                                    UserName = a.UserName,
-                                    PhoneNum = a.PhoneNum,
-                                    Email = a.Email,
-                                    DepartmentName = b.DepartmentName,
-                                    Sex = a.Sex == 0 ? '女' : '男',
-                                    IsAdmin = a.IsAdmin == true ? '是' : '否',
-                                    CreateTime = a.CreateTime.ToString(),
-                                });
-            // 进行查询
-            if (findUserInfoDto.UserName != null)
-            {
-                userInfoList = userInfoList.Where(a => a.UserName.Contains(findUserInfoDto.UserName));
-            }
-            if (findUserInfoDto.Account != null)
-            {
-                userInfoList = userInfoList.Where(a => a.Account.Equals(findUserInfoDto.Account));
-            }
-            // 获取总条数
-            userInfoCoutn = userInfoList.Count();
-
-            return userInfoList.OrderBy(a => a.CreateTime) // 按添加时间排序
-            .Skip(findUserInfoDto.limit * (findUserInfoDto.page - 1)).Take(findUserInfoDto.limit).ToList(); // 分页操作
-        }
-        /// <summary>
         /// 添加用户信息
         /// </summary>
         /// <param name="userInfo"></param>

@@ -1,6 +1,8 @@
-﻿using DAL;
+﻿using Common.ResultEnums;
+using DAL;
 using IDepositoryBll;
 using IDepositoryDal;
+using Microsoft.EntityFrameworkCore;
 using Sister;
 using Sister.Dtos.UserInfo;
 using Sister.Tools;
@@ -14,16 +16,19 @@ using Tools;
 
 namespace BLL
 {
-    public class UserInfoBll: IUserInfoBll
+    public class UserInfoBll : IUserInfoBll
     {
         // 注入操作用户信息数据对象
         private readonly IUserInfoDal _userInfoDal;
         // 注入md5加密对象
         private readonly MD5Encrypt _mD5Encrypt1;
-        public UserInfoBll(IUserInfoDal userInfoDal,MD5Encrypt mD5Encrypt)
+        // 注入部门管理dal
+        private readonly IDepartmentInfoDal _departmentInfoDal;
+        public UserInfoBll(IUserInfoDal userInfoDal, MD5Encrypt mD5Encrypt, IDepartmentInfoDal departmentInfoDal)
         {
             this._userInfoDal = userInfoDal;
             this._mD5Encrypt1 = mD5Encrypt;
+            this._departmentInfoDal = departmentInfoDal;
         }
 
         /// <summary>
@@ -122,15 +127,46 @@ namespace BLL
             ajaxResult.code = 200;
             return ajaxResult;
         }
-        
+
         /// <summary>
         /// 获取用户信息业务
         /// </summary>
-        /// <param name="findUserInfoDto"></param>
+        /// <param name="findUserInfoDto">查询用户和分页dto</param>
         /// <returns></returns>
-        public List<UserInfoDto> GetUserInfoBll(FindUserInfoDto findUserInfoDto,out int userInfoCount)
+        public List<UserInfoDto> GetUserInfoBll(FindUserInfoDto findUserInfoDto, out int userInfoCount)
         {
-            return _userInfoDal.GetUserInfo(findUserInfoDto, out userInfoCount);
+            var userInfoList = (from a in _userInfoDal.GetAll()
+                                    .Where(a => a.IsDelete == false && a.Account != findUserInfoDto.LoginAccount)
+                                    .OrderByDescending(a => a.CreateTime)     // 降序排序
+                                join b in _departmentInfoDal.GetAll() // 连表(左连)
+                                on a.DepartmentId equals b.Id into JoinUserInfos
+                                from JoinU in JoinUserInfos.DefaultIfEmpty()
+                                select new UserInfoDto
+                                {
+                                    Id = a.Id,
+                                    Account = a.Account,
+                                    UserName = a.UserName,
+                                    PhoneNum = a.PhoneNum,
+                                    Email = a.Email,
+                                    DepartmentName = JoinU.DepartmentName,
+                                    Sex = a.Sex == 0 ? '女' : '男',
+                                    IsAdmin = a.IsAdmin == true ? '是' : '否',
+                                    CreateTime = a.CreateTime.ToString("yyyy-MM-dd HH:mm:ss"), // 格式化时间
+                                });
+            // 进行查询
+            if (findUserInfoDto.UserName != null)
+            {
+                userInfoList = userInfoList.Where(a => a.UserName.Contains(findUserInfoDto.UserName));
+            }
+            if (findUserInfoDto.Account != null)
+            {
+                userInfoList = userInfoList.Where(a => a.Account.Equals(findUserInfoDto.Account));
+            }
+            // 获取总条数
+            userInfoCount = userInfoList.Count();
+
+            return userInfoList// 按添加时间排序
+            .Skip(findUserInfoDto.limit * (findUserInfoDto.page - 1)).Take(findUserInfoDto.limit).ToList(); // 分页操作
         }
 
         /// <summary>
@@ -138,14 +174,14 @@ namespace BLL
         /// </summary>
         /// <param name="addUserInfoDto"></param>
         /// <returns></returns>
-        public bool AddUserInfo(AddUserInfoDto addUserInfoDto,out string msg)
+        public bool AddUserInfo(AddUserInfoDto addUserInfoDto, out string msg)
         {
             try
             {
                 // 根据account查询用户信息
                 UserInfo userob = _userInfoDal.GetAll().FirstOrDefault(u => u.Account == addUserInfoDto.Account);
                 // 判断账号是否存在
-                if(userob != null)
+                if (userob != null)
                 {
                     msg = "该账号以存在";
                     return false;
@@ -167,7 +203,7 @@ namespace BLL
                     PassWord = addUserInfoDto.PassWord
                 };
                 // 执行添加操作并返回状态
-                if(_userInfoDal.AddAsync(userInfo).Result)
+                if (_userInfoDal.AddAsync(userInfo).Result)
                 {
                     msg = "添加成功";
                     return true;
@@ -229,6 +265,66 @@ namespace BLL
             {
                 return false;
             }
+        }
+        /// <summary>
+        /// 获取用户id和名称作为下拉框数据业务
+        /// </summary>
+        /// <returns></returns>
+        public List<SelectOptionsDto> GetSelectInfoBll()
+        {
+            return _userInfoDal.GetAll().Select(u => new SelectOptionsDto { Value = u.Id, Title = u.UserName }).ToList();
+        }
+        /// <summary>
+        /// 校验修改用户基本信息数据
+        /// </summary>
+        /// <param name="editUserBaseInfoDto">修改用户基本信息dto</param>
+        /// <returns></returns>
+        public UserInfoEnums EditUserBaseInfoCheck(EditUserBaseInfoDto editUserBaseInfoDto)
+        {
+            if (editUserBaseInfoDto.PhoneNum == null)
+            {
+
+            }
+            else if (!Regex.IsMatch(editUserBaseInfoDto.PhoneNum, @"^1[3456789]\d{9}$"))
+            {
+                return UserInfoEnums.PhoneNumError;
+            }
+            if (editUserBaseInfoDto.Email == null)
+            {
+
+            }
+            else if (!Regex.IsMatch(editUserBaseInfoDto.Email, @"^[1-9][0-9]{4,}@qq.com$"))
+            {
+                return UserInfoEnums.EmailErro;
+            }
+            return UserInfoEnums.CheckSuccess;
+        }
+        /// <summary>
+        /// 修改用户基本资料业务
+        /// </summary>
+        /// <param name="editUserBaseInfo">修改用户基本资料dto</param>
+        /// <returns></returns>
+        public async Task<UserInfoEnums> UpdateUserBaseInfo(EditUserBaseInfoDto editUserBaseInfo)
+        {
+            if (EditUserBaseInfoCheck(editUserBaseInfo) == UserInfoEnums.CheckSuccess)
+            {
+                // 根据账号查询到对应的用户信息
+                UserInfo userInfo = await _userInfoDal.GetAll().FirstOrDefaultAsync(u => u.Account == editUserBaseInfo.Account);
+                // 判断是否查询到对应的用户信息
+                if (userInfo != null)
+                {
+                    userInfo.PhoneNum = editUserBaseInfo.PhoneNum;
+                    userInfo.Email = editUserBaseInfo.Email;
+                    // 判断是否修改成功
+                    if (await _userInfoDal.EditAsync(userInfo))
+                    {
+                        return UserInfoEnums.EditUserInfoSuccess;
+                    }
+                    return UserInfoEnums.EditUserInfoError;
+                }
+                return UserInfoEnums.UserInfoNotExist;
+            }
+            return EditUserBaseInfoCheck(editUserBaseInfo);
         }
     }
 }

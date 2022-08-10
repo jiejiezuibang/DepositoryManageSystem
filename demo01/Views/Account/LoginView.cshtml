@@ -163,9 +163,14 @@
                 success: function (res) {
                     if (res.code == 200) {
                         // 给sessionStorage赋值
-                        sessionStorage.setItem("userName", res.data)
-                        window.location.href = '/Home/MainView';
+                        sessionStorage.setItem("userName", res.data.userName)
+                        sessionStorage.setItem("id", res.data.id)
+                        // 显示友好提示
+                        layer.msg("登录成功", function () {
+                            window.location.href = '/Home/MainView';
+                        })
                     } else {
+                        // 显示错误提示
                         layer.msg(res.msg)
                     }
                 }

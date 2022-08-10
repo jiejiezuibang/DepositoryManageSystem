@@ -52,7 +52,6 @@ namespace DepositoryServer.Controllers
         /// </summary>
         /// <param name="findRoleInfoDto">查询角色信息dto</param>
         /// <returns></returns>
-        [HttpGet]
         public IActionResult GetRoleInfoShow(FindRoleInfoDto findRoleInfoDto)
         {
             AjaxResult ajaxResult = new AjaxResult();
@@ -67,7 +66,7 @@ namespace DepositoryServer.Controllers
                 ajaxResult.count = RoleInfoCount;
                 return Json(ajaxResult);
             }
-            ajaxResult.code = 500;
+            ajaxResult.code = 200;
             ajaxResult.msg = "没有更多的角色信息了";
             return Json(ajaxResult);
         }

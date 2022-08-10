@@ -15,5 +15,9 @@ namespace Sister.Dtos.UserInfo
         /// 用户名称
         /// </summary>
         public string UserName { get; set; }
+        /// <summary>
+        /// 当前登录账号
+        /// </summary>
+        public string LoginAccount { get; set; }
     }
 }

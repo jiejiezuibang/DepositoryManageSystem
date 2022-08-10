@@ -27,12 +27,12 @@ namespace Sister.Dtos.DeparmentInfo
         /// <summary>
         /// 主管id
         /// </summary>
-        public string LeaderId { get; set; }
+        public string LeaderName { get; set; }
 
         /// <summary>
         /// 父部门id
         /// </summary>
-        public string ParentId { get; set; }
+        public string ParentName { get; set; }
 
         /// <summary>
         /// 创建时间

@@ -59,11 +59,15 @@
                     <li class="layui-nav-item mobile layui-hide-xs" lay-unselect>
                         <a href="javascript:;" data-check-screen="full"><i class="fa fa-arrows-alt"></i></a>
                     </li>
+                    <li class="layui-nav-item" lay-unselect>
+                        <img src="/images/头像a.jpg" style="width:50px;height:50px" />
+                    </li>
                     <li class="layui-nav-item layuimini-setting">
+                        
                         <a href="javascript:;" id="userName">admin</a>
                         <dl class="layui-nav-child">
                             <dd>
-                                <a href="javascript:;" layuimini-content-href="page/user-setting.html" data-title="基本资料" data-icon="fa fa-gears">基本资料<span class="layui-badge-dot"></span></a>
+                                <a href="javascript:;" layuimini-content-href="/Home/UserBaseInfoView" data-title="基本资料" data-icon="fa fa-gears">基本资料<span class="layui-badge-dot"></span></a>
                             </dd>
                             <dd>
                                 <a href="javascript:;" layuimini-content-href="/Account/ResetPwdView" data-title="修改密码" data-icon="fa fa-gears">修改密码</a>
@@ -135,6 +139,7 @@
             miniAdmin = layui.miniAdmin,
             miniTongji = layui.miniTongji;
 
+    // 获取当前登录用户并赋值
     $("#userName").text(sessionStorage.getItem("userName"));
 
         var options = {

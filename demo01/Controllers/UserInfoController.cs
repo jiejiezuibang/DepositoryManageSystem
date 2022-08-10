@@ -1,5 +1,7 @@
 ﻿using BLL;
+using Common.ResultEnums;
 using IDepositoryBll;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Sister;
 using Sister.Dtos.UserInfo;
@@ -62,6 +64,8 @@ namespace demo01.Controllers
                 int userInfoCount = 0;
                 if(_userInfoBll.GetUserInfoBll(findUserInfoDto, out userInfoCount).Count > 0)
                 {
+                    // 获取到当前登录账号并赋值给dto
+                    findUserInfoDto.LoginAccount = HttpContext.Session.GetString("account");
                     ajaxResult.code = 0;
                     ajaxResult.msg = "获取用户信息成功";
                     ajaxResult.data = _userInfoBll.GetUserInfoBll(findUserInfoDto, out userInfoCount);
@@ -177,6 +181,34 @@ namespace demo01.Controllers
             {
                 return Json(ajaxResult);
             }
+        }
+        /// <summary>
+        /// 修改用户基本信息接口
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> EditUserBaseInfo(EditUserBaseInfoDto editUserBaseInfoDto)
+        {
+            AjaxResult ajaxResult = new AjaxResult();
+            // 从session中获得到用户账号
+            editUserBaseInfoDto.Account = HttpContext.Session.GetString("account");
+            // 判断修改状态
+            switch (await _userInfoBll.UpdateUserBaseInfo(editUserBaseInfoDto))
+            {
+                case UserInfoEnums.EditUserInfoSuccess:
+                    ajaxResult.code = 200;
+                    ajaxResult.msg = "修改用户基本信息成功";
+                    break;
+                case UserInfoEnums.EmailErro:
+                    ajaxResult.msg = "修改失败,邮箱格式错误";
+                    break;
+                case UserInfoEnums.PhoneNumError:
+                    ajaxResult.msg = "修改失败，号码格式错误";
+                    break;
+                case UserInfoEnums.UserInfoNotExist:
+                    ajaxResult.msg = "修改失败，用户信息不存在";
+                    break;
+            }
+            return Json(ajaxResult);
         }
     }
 }

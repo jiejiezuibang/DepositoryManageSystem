@@ -18,7 +18,7 @@ namespace IDepositoryBll
         /// <param name="UserName">用户名</param>
         /// <param name="Account">账号</param>
         /// <returns></returns>
-        AccoutnLoginEnums DoLogin(string account, string password, out string UserName, out string Account);
+        AccoutnLoginEnums DoLogin(string account, string password, out string UserName, out string Account, out string Id);
         /// <summary>
         /// 重置密码
         /// </summary>
