@@ -28,6 +28,10 @@ namespace Sister
         /// 文件信息数据集
         /// </summary>
         public DbSet<FileInfo> FileInfos { get; set; }
+        /// <summary>
+        /// 用户角色数据集
+        /// </summary>
+        public DbSet<R_UserInfo_RoleInfo> R_UserInfo_RoleInfos { get; set; }
         //protected override void OnConfiguring(DbContextOptionsBuilder options)
         //=> options.UseSqlServer($"server=DESKTOP-FSDTD8V\\SQLEXPRESS;database=DepositoryManageSystem;uid=sa;pwd=123");
     }

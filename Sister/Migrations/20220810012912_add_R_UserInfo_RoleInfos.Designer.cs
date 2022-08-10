@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sister;
 
 namespace Sister.Migrations
 {
     [DbContext(typeof(DepositoryContext))]
-    partial class DepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20220810012912_add_R_UserInfo_RoleInfos")]
+    partial class add_R_UserInfo_RoleInfos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -18,10 +18,13 @@ namespace demo01.Controllers
     public class UserInfoController : Controller
     {
         // 注入用户管理bll业务对象
-        public readonly IUserInfoBll _userInfoBll;
-        public UserInfoController(IUserInfoBll userInfoBll)
+        private readonly IUserInfoBll _userInfoBll;
+        // 注入部门管理bll业务对象
+        private readonly IDepartmentInfoBll _departmentInfoBll;
+        public UserInfoController(IUserInfoBll userInfoBll, IDepartmentInfoBll departmentInfoBll)
         {
             this._userInfoBll = userInfoBll;
+            this._departmentInfoBll = departmentInfoBll;
         }
         /// <summary>
         /// 展示用户信息主页面
@@ -94,12 +97,20 @@ namespace demo01.Controllers
         public async Task<IActionResult> FindIdUserInfo(string Id)
         {
             AjaxResult ajaxResult = new AjaxResult();
+            // 获取作为下拉框数据的部门信息
+            List<SelectOptionsDto> selectOptionsDtos = _departmentInfoBll.GetSelectOptions();
+            // 根据Id获取到对应的用户信息
+            UserInfo userInfo = await _userInfoBll.FindIdUserInfo(Id);
             // 获取查询的用户Id信息
-            if(await _userInfoBll.FindIdUserInfo(Id)!= null)
+            if (await _userInfoBll.FindIdUserInfo(Id)!= null)
             {
                 ajaxResult.code = 200;
                 ajaxResult.msg = "获取用户信息成功";
-                ajaxResult.data = await _userInfoBll.FindIdUserInfo(Id);
+                ajaxResult.data = new
+                {
+                    userInfo,
+                    selectOptionsDtos
+                };
                 return Json(ajaxResult);
             }
             ajaxResult.code = 404;

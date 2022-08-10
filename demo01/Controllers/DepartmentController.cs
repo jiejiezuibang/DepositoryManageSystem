@@ -2,6 +2,7 @@
 using Common.ResultEnums;
 using IDepositoryBll;
 using Microsoft.AspNetCore.Mvc;
+using Sister;
 using Sister.Dtos.DeparmentInfo;
 using Sister.Dtos.UserInfo;
 using Sister.Tools;
@@ -72,9 +73,20 @@ namespace DepositoryServer.Controllers
             // 判断是否获取到指定部门
             if(await _departmentInfoBll.FindDepartmentInfoBll(Id) != null)
             {
+                // 获取到用户信息作为下拉框的数据
+                List<SelectOptionsDto> userSelectOptions = _userInfoBll.GetSelectInfoBll();
+                // 获取到部门信息作为下拉框的数据
+                List<SelectOptionsDto> departmentSelectOptions = _departmentInfoBll.GetSelectOptions(Id);
+                // 根据Id获取到对应部门信息
+                DepartmentInfo departmentInfo = await _departmentInfoBll.FindDepartmentInfoBll(Id);
                 ajaxResult.code = 200;
                 ajaxResult.msg = "获取指定部门成功";
-                ajaxResult.data = await _departmentInfoBll.FindDepartmentInfoBll(Id);
+                ajaxResult.data = new
+                {
+                    departmentInfo,
+                    userSelectOptions,
+                    departmentSelectOptions
+                };
                 return Json(ajaxResult);
             }
             ajaxResult.code = 500;
@@ -147,8 +159,9 @@ namespace DepositoryServer.Controllers
         public async Task<IActionResult> EditDepartementInfo(EditDeparmentInfoDto editDeparmentInfoDto)
         {
             AjaxResult ajaxResult = new AjaxResult();
+
             // 校验前端传递的修改数据是否合格
-            if(_departmentInfoBll.EditDeparmentDataCheck(editDeparmentInfoDto).code != 200)
+            if (_departmentInfoBll.EditDeparmentDataCheck(editDeparmentInfoDto).code != 200)
             {
                 return Json(ajaxResult);
             }

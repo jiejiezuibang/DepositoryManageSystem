@@ -125,7 +125,7 @@
                         maxmin: true,
                         shadeClose: true,
                         area: ['100%', '100%'],
-                        content: '/Role/AddRoleInfoView',
+                        content: '/RoleInfo/AddRoleInfoView',
                         end: function () { // 回调函数，弹出层销毁后触发
                             //执行搜索重载
                             table.reload('currentTableId', {
@@ -151,7 +151,7 @@
                             IdList.push(checkStatus.data[i].id)
                         }
                         $.ajax({
-                            url: '/UserInfo/DelUserInfo',
+                            url: '/RoleInfo/DelRoleInfo',
                             type: 'delete',
                             data: { IdList: IdList },
                             success: function (res) {
@@ -184,7 +184,7 @@
                 var data = obj.data;
                 if (obj.event === 'edit') {
                     // UserId赋值用户id，给修改页面调用
-                    UserInfoId = data.id;
+                    RoleInfoId = data.id;
                     var index = layer.open({
                         title: '编辑用户',
                         type: 2,
@@ -192,7 +192,7 @@
                         maxmin: true,
                         shadeClose: true,
                         area: ['100%', '100%'],
-                        content: '/Role/EditRoleInfoView',
+                        content: '/RoleInfo/EditRoleInfoView',
                         end: function () { // 回调函数，弹出层销毁后触发
                             //执行搜索重载
                             table.reload('currentTableId', {
@@ -213,7 +213,7 @@
                         var IdList = []
                         IdList.push(data.id)
                         $.ajax({
-                            url: '/UserInfo/DelUserInfo',
+                            url: '/RoleInfo/DelRoleInfo',
                             type: 'delete',
                             data: { IdList: IdList },
                             success: function (res) {

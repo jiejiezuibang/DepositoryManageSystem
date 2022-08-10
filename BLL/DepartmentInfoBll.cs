@@ -186,7 +186,16 @@ namespace BLL
         /// <returns></returns>
         public List<SelectOptionsDto> GetSelectOptions()
         {
-            return _departmentInfoDal.GetAll().Select(d => new SelectOptionsDto { Title = d.DepartmentName, Value = d.Id }).ToList();
+            return _departmentInfoDal.GetAll().Where(d => !d.IsDelete).Select(d => new SelectOptionsDto { Title = d.DepartmentName, Value = d.Id }).ToList();
+        }
+        /// <summary>
+        /// 获取部门信息作为修改部门下拉框数据
+        /// </summary>
+        /// <param name="Id">要修改部门的Id</param>
+        /// <returns></returns>
+        public List<SelectOptionsDto> GetSelectOptions(string Id)
+        {
+            return _departmentInfoDal.GetAll().Where(d => !d.IsDelete && d.Id!=Id && d.ParentId != Id).Select(d => new SelectOptionsDto { Title = d.DepartmentName, Value = d.Id }).ToList();
         }
     }
 }

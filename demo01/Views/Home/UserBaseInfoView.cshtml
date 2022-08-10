@@ -54,7 +54,7 @@
     <script>layui.use(['form','miniTab','upload','jquery'], function () {
         var form = layui.form,
             layer = layui.layer,
-        miniTab = layui.miniTab;
+            miniTab = layui.miniTab;
     var upload = layui.upload;
     var $ = layui.jquery;
 
@@ -82,7 +82,10 @@
                 data: data.field,
                 success: function (res) {
                     if (res.code == 200) {
-                        layer.msg(res.msg)
+                        layer.msg(res.msg, function () {
+                            // 关闭当前选项卡
+                            miniTab.deleteCurrentByIframe()
+                        })
                     } else {
                         layer.msg(res.msg)
                     }

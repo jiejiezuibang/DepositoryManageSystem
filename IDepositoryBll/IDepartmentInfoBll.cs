@@ -66,5 +66,11 @@ namespace IDepositoryBll
         /// </summary>
         /// <returns></returns>
         List<SelectOptionsDto> GetSelectOptions();
+        /// <summary>
+        /// 获取部门信息作为修改部门下拉框数据
+        /// </summary>
+        /// <param name="Id">要修改的部门Id</param>
+        /// <returns></returns>
+        List<SelectOptionsDto> GetSelectOptions(string Id);
     }
 }

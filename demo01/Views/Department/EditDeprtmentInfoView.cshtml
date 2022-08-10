@@ -60,26 +60,6 @@
                 layer = layui.layer,
                 $ = layui.$;
 
-            // 渲染下拉框
-            $.ajax({
-                url: '/Department/GetSelectOptions',
-                type: 'get',
-                success: function (res) {
-                    console.log(res.data.userSelectOptions)
-                    // 循环渲染下拉框数据
-                    $.each(res.data.userSelectOptions, function (index, data) {
-                        // 主管
-                        $("#Leader").append(new Option(data.title, data.value))
-                    })
-                    $.each(res.data.departmentSelectOptions, function (index, data) {
-                        // 父部门
-                        $("#Parent").append(new Option(data.title, data.value))
-                    })
-                    // 重新渲染select 固定写法
-                    layui.form.render("select");
-                }
-            })
-
             // 渲染部门信息
             $.ajax({
                 url: '/Department/FindIdDepartmentInfo',
@@ -87,12 +67,25 @@
                 data: { Id: parent.DepartmentId },
                 success: function (res) {
                     if (res.code == 200) {
+                        // 循环渲染下拉框数据
+                        $.each(res.data.userSelectOptions, function (index, data) {
+                            // 主管
+                            $("#Leader").append(new Option(data.title, data.value))
+                        })
+                        $.each(res.data.departmentSelectOptions, function (index, data) {
+                            // 父部门
+                            $("#Parent").append(new Option(data.title, data.value))
+                        })
+                        // 重新渲染select 固定写法
+                        layui.form.render("select");
+
+                        // 给表单赋值
                         form.val("EditDepartmentForm", { //formTest 即 class="layui-form" 所在元素属性 lay-filter="" 对应的值
-                            "DepartmentName": res.data.departmentName // "name": "value"
-                            , "LeaderId": res.data.leaderId
-                            , "ParentId": res.data.parentId
-                            , "Description": res.data.description
-                            , "Id": res.data.id
+                            "DepartmentName": res.data.departmentInfo.departmentName // "name": "value"
+                            , "LeaderId": res.data.departmentInfo.leaderId
+                            , "ParentId": res.data.departmentInfo.parentId
+                            , "Description": res.data.departmentInfo.description
+                            , "Id": res.data.departmentInfo.id
                         });
                     }
                 }

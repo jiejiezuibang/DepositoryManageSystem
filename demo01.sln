@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Tools\Common.cspr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IDepositoryDal", "IDepositoryDal\IDepositoryDal.csproj", "{DEAED9F8-154A-4C1B-B6D6-FB390490E51A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDepositoryBll", "IDepositoryBll\IDepositoryBll.csproj", "{5C3AACFA-4764-47EF-BFB7-EBA764EC5251}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IDepositoryBll", "IDepositoryBll\IDepositoryBll.csproj", "{5C3AACFA-4764-47EF-BFB7-EBA764EC5251}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

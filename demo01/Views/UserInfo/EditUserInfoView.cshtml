@@ -80,19 +80,6 @@
                 layer = layui.layer,
                 $ = layui.$;
 
-            // 给下拉框赋值
-            $.ajax({
-                url: '/DepartmentInfo/GetDepartmentInfo',
-                type: 'get',
-                success: function (res) {
-                    // 使用循环遍历，给下拉列表赋值
-                    $.each(res.data, function (index, value) {
-                        // 向下拉框添加元素
-                        $("#Department").append(new Option(value.departmentName, value.id))
-                    });
-                    layui.form.render("select"); // 重新渲染，固定写法
-                }
-            })
 
             // 查询用户信息给表单赋值
             $.ajax({
@@ -103,18 +90,26 @@
                     console.log(res)
                     if (res.code == 200) {
                         var data = res.data
+
+                        // 使用循环遍历，给下拉列表赋值
+                        $.each(res.data.selectOptionsDtos, function (index, value) {
+                            // 向下拉框添加元素
+                            $("#Department").append(new Option(value.title, value.value))
+                        });
+                        layui.form.render("select"); // 重新渲染，固定写法
+
                         // 给表单赋值
                         form.val("EditUserInfoForm", { //formTest 即 class="layui-form" 所在元素属性 lay-filter="" 对应的值
-                            "Account": data.account, // "name": "value"
-                            "UserName": data.userName,
-                            "PassWord": data.passWord,
-                            "PhoneNum": data.phoneNum,
-                            "Email": data.email,
-                            "DepartmentId": data.departmentId,
-                            "CreateTime": data.createTime,
-                            "Id": data.id,
-                            "Sex": data.sex,
-                            "IsAdmin": data.isAdmin.toString()
+                            "Account": data.userInfo.account, // "name": "value"
+                            "UserName": data.userInfo.userName,
+                            "PassWord": data.userInfo.passWord,
+                            "PhoneNum": data.userInfo.phoneNum,
+                            "Email": data.userInfo.email,
+                            "DepartmentId": data.userInfo.departmentId,
+                            "CreateTime": data.userInfo.createTime,
+                            "Id": data.userInfo.id,
+                            "Sex": data.userInfo.sex,
+                            "IsAdmin": data.userInfo.isAdmin.toString()
                         });
                     } else if (res.code == 404) {
                         layer.alert(res.msg)

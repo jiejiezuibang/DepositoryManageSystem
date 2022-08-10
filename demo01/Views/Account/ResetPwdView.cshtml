@@ -75,7 +75,15 @@
                     if (res.code == 200) {
                         layer.alert(res.msg, function () {
                             // 返回登录界面
-                            window.location.href = '/Account/LoginView'
+                            $.ajax({
+                                url: '/account/OutAccountLogin',
+                                type: 'get',
+                                success: function (res) {
+                                    if (res.code == 200) {
+                                        window.location = '/Account/LoginView';
+                                    }
+                                }
+                            })
                         })
                     } else {
                         layer.alert(res.msg)
