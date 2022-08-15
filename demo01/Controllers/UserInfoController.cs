@@ -221,5 +221,34 @@ namespace demo01.Controllers
             }
             return Json(ajaxResult);
         }
+        /// <summary>
+        /// 获取作为穿梭框数据的用户信息
+        /// </summary>
+        public IActionResult GetShuttleBoxUserInfo(string RoleId)
+        {
+            // 获取到作为穿梭框数据的用户信息
+            List<SelectOptionsDto> selectOptionsDtos = _userInfoBll.GetSelectInfoBll();
+            // 根据角色Id获取到角色拥有哪些用户
+            List<string> userInfos = _userInfoBll.GetBindUserInfo(RoleId);
+            // 判断是否有数据并且传递数据回去给前端
+            if (selectOptionsDtos.Count > 0)
+            {
+                return Json(new AjaxResult()
+                {
+                    code = 200,
+                    msg = "获取用户穿梭框数据成功",
+                    data = new
+                    {
+                        userInfos,
+                        selectOptionsDtos
+                    }
+                });
+            }
+            return Json(new AjaxResult()
+            {
+                code = 501,
+                msg = "没有更多的用户穿梭框数据"
+            });
+        }
     }
 }

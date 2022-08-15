@@ -62,16 +62,23 @@
             <script type="text/html" id="currentTableBar">
                 <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
                 <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+                <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="AssigningRoles">
+                    <i class="layui-icon">&#xe654;</i>
+                    分配角色
+                </a>
             </script>
 
         </div>
     </div>
+
+
     <script src="/layuimini/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
     <script>
-    layui.use(['form', 'table',], function () {
+        layui.use(['form', 'table','transfer'], function () {
             var $ = layui.jquery,
                 form = layui.form,
                 table = layui.table;
+            var transfer = layui.transfer;
 
         table.render({
             elem: '#currentTableId',
@@ -99,7 +106,6 @@
 
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
-            console.log(data)
             //执行搜索重载
             table.reload('currentTableId', {
                 page: {
@@ -183,7 +189,7 @@
             table.on('tool(currentTableFilter)', function (obj) {
                 var data = obj.data;
                 if (obj.event === 'edit') {
-                    // UserId赋值用户id，给修改页面调用
+                    // RoleInfoIdd赋值用户id，给修改页面调用
                     RoleInfoId = data.id;
                     var index = layer.open({
                         title: '编辑用户',
@@ -234,9 +240,20 @@
                             }
                         })
                     });
+                } else if (obj.event === 'AssigningRoles') {
+                    RoleInfoId = data.id;
+                    layer.open({
+                        title:'分配角色',
+                        type: 2,
+                        shade: 0.2,
+                        maxmin: true,
+                        area: ['510px','510px'],
+                        content: '/R_UserInfo_RoleInfo/BindUserView',
+                    });
                 }
             });
-
-        });</script>
+            
+        });
+    </script>
 </body>
 </html>

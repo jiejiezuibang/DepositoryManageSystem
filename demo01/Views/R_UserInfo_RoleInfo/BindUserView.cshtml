@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/layuimini/lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuimini/css/public.css" media="all">
+</head>
+<body>
+    <div>
+        <!-- 穿梭框 -->
+        <div id="ShuttleBox">
+
+        </div>
+        <button style="margin-left: 193px;margin-top:15px;margin-bottom:15px;" id="BindUserInfo" class="layui-btn layui-btn-normal">确认保存</button>
+    </div>
+    <script src="/layuimini/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+    <script>
+        layui.use(['form', 'transfer'], function () {
+            var $ = layui.jquery;
+            var transfer = layui.transfer;
+
+           // 渲染穿梭框
+            $.ajax({
+                url: '/UserInfo/GetShuttleBoxUserInfo',
+                type: 'get',
+                data: { RoleId: parent.RoleInfoId },
+                success: function (res) {
+                    //渲染穿梭框
+                    transfer.render({
+                        elem: '#ShuttleBox'  //绑定元素
+                        , showSearch: true
+                        , title: ['待分配角色', '已分配角色']
+                        , data: res.data.selectOptionsDtos
+                        , value: res.data.userInfos
+                        , id: 'ShuttleBoxData' //定义索引
+                    });
+                }
+            })
+
+
+            // 确认保存穿梭框的数据
+            $("#BindUserInfo").click(function () {
+                // 获取当前角色Id
+                var RoleId = parent.RoleInfoId
+                // 获取选中角色Id
+                var UserId = []
+                // 循环获取角色Id
+                var ShuttleBoxData = transfer.getData('ShuttleBoxData');
+                for (var i = 0; i < ShuttleBoxData.length; i++) {
+                    UserId.push(ShuttleBoxData[i].value)
+                }
+                // 发起ajax绑定角色
+                $.ajax({
+                    url: '/R_UserInfo_RoleInfo/BindUser',
+                    type: 'post',
+                    data: {
+                        RoleId: RoleId,
+                        UserId: UserId
+                    },
+                    success: function (res) {
+                        if (res.code == 200) {
+                            layer.msg(res.msg)
+                        } else {
+                            layer.msg(res.msg)
+                        }
+                    }
+                })
+            })
+
+        });
+    </script>
+</body>
+</html>

@@ -5,13 +5,8 @@ using System.Text;
 
 namespace Sister
 {
-    public class RoleInfo
+    public class RoleInfo: DelSister
     {
-        /// <summary>
-        /// 角色id
-        /// </summary>
-        [Column(TypeName ="varchar(36)")]
-        public string Id { get; set; }
         /// <summary>
         /// 角色名称
         /// </summary>
@@ -26,13 +21,5 @@ namespace Sister
         /// 创建时间
         /// </summary>
         public DateTime CreateTime { get; set; }
-        /// <summary>
-        /// 是否删除
-        /// </summary>
-        public bool IsDelete { get; set; }
-        /// <summary>
-        /// 删除时间
-        /// </summary>
-        public DateTime DeleteTime { get; set; }
     }
 }

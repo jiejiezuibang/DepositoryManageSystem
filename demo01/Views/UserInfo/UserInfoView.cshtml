@@ -67,11 +67,14 @@
 
         </div>
     </div>
+
+
     <script src="/layuimini/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
-    <script>layui.use(['form', 'table',], function () {
+    <script>layui.use(['form', 'table', 'transfer'], function () {
         var $ = layui.jquery,
             form = layui.form,
-            table = layui.table;
+        table = layui.table;
+        var transfer = layui.transfer;
 
         table.render({
             elem: '#currentTableId',
@@ -101,6 +104,8 @@
             id: 'currentTableId'
         });
 
+        
+
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
             //执行搜索重载
@@ -126,7 +131,7 @@
                     title: '添加用户',
                     type: 2,
                     shade: 0.2,
-                    maxmin:true,
+                    maxmin: true,
                     shadeClose: true,
                     area: ['100%', '100%'],
                     content: '/UserInfo/AddUserInfoView',
@@ -176,7 +181,7 @@
                         }
                     })
                 });
-                
+
             }
         });
 

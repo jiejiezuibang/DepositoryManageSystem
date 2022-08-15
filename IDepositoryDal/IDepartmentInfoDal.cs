@@ -9,7 +9,7 @@ namespace IDepositoryDal
     /// <summary>
     /// 部门管理接口
     /// </summary>
-    public interface IDepartmentInfoDal:IBaseDal<DepartmentInfo>
+    public interface IDepartmentInfoDal: IDelRemoveDal<DepartmentInfo>
     {
 
     }

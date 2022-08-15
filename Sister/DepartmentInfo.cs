@@ -5,14 +5,8 @@ using System.Text;
 
 namespace Sister
 {
-    public class DepartmentInfo
+    public class DepartmentInfo:DelSister
     {
-        /// <summary>
-        /// 主键Id
-        /// </summary>
-        [Column(TypeName ="varchar(36)")]
-        public string Id { get; set; }
-
         /// <summary>
         /// 描述
         /// </summary>
@@ -41,15 +35,5 @@ namespace Sister
         /// 创建时间
         /// </summary>
         public DateTime CreateTime { get; set; }
-
-        /// <summary>
-        /// 是否删除 
-        /// </summary>
-        public bool IsDelete { get; set; }
-
-        /// <summary>
-        /// 删除时间
-        /// </summary>
-        public DateTime DeleteTime { get; set; }
     }
 }

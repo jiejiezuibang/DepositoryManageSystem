@@ -8,47 +8,50 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class R_UserInfo_RoleInfoDal : IR_UserInfo_RoleInfoDal
+    public class R_UserInfo_RoleInfoDal :BaseDal<R_UserInfo_RoleInfo>,IR_UserInfo_RoleInfoDal
     {
         /// <summary>
         /// 注入数据库上下文对象
         /// </summary>
         private readonly DepositoryContext _depositoryContext;
-        public R_UserInfo_RoleInfoDal(DepositoryContext depositoryContext)
+        public R_UserInfo_RoleInfoDal(DepositoryContext depositoryContext) :base(depositoryContext)
         {
             this._depositoryContext = depositoryContext;
         }
-        /// <summary>
-        /// 添加用户角色信息表
-        /// </summary>
-        /// <param name="r_UserInfo_RoleInfo"></param>
-        /// <returns></returns>
-        public async Task<bool> AddAsync(R_UserInfo_RoleInfo r_UserInfo_RoleInfo)
-        {
-            // 打上添加标记
-            await _depositoryContext.AddAsync(r_UserInfo_RoleInfo);
-            // 执行sql操作并返回bool值
-            return await _depositoryContext.SaveChangesAsync() > 0;
-        }
+        ///// <summary>
+        ///// 添加用户角色信息表
+        ///// </summary>
+        ///// <param name="r_UserInfo_RoleInfo"></param>
+        ///// <returns></returns>
+        //public async Task<bool> AddAsync(R_UserInfo_RoleInfo r_UserInfo_RoleInfo)
+        //{
+        //    // 打上添加标记
+        //    await _depositoryContext.AddAsync(r_UserInfo_RoleInfo);
+        //    // 执行sql操作并返回bool值
+        //    return await _depositoryContext.SaveChangesAsync() > 0;
+        //}
 
-        public Task<bool> DelAsync(string[] Id)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<bool> DelAsync(string[] Id)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task<bool> EditAsync(R_UserInfo_RoleInfo t)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<bool> EditAsync(R_UserInfo_RoleInfo t)
+        //{
+        //    throw new NotImplementedException();
+        //}
+        ///// <summary>
+        ///// 返回用户角色信息数据集
+        ///// </summary>
+        ///// <returns></returns>
+        //public DbSet<R_UserInfo_RoleInfo> GetAll()
+        //{
+        //    return _depositoryContext.R_UserInfo_RoleInfos;
+        //}
 
-        public DbSet<R_UserInfo_RoleInfo> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<R_UserInfo_RoleInfo> GetAsync(string Id)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<R_UserInfo_RoleInfo> GetAsync(string Id)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

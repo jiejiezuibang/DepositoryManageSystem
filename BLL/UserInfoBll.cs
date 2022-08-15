@@ -24,11 +24,14 @@ namespace BLL
         private readonly MD5Encrypt _mD5Encrypt1;
         // 注入部门管理dal
         private readonly IDepartmentInfoDal _departmentInfoDal;
-        public UserInfoBll(IUserInfoDal userInfoDal, MD5Encrypt mD5Encrypt, IDepartmentInfoDal departmentInfoDal)
+        // 注入用户角色dal
+        private readonly IR_UserInfo_RoleInfoDal _r_UserInfo_RoleInfoDal;
+        public UserInfoBll(IUserInfoDal userInfoDal, MD5Encrypt mD5Encrypt, IDepartmentInfoDal departmentInfoDal, IR_UserInfo_RoleInfoDal r_UserInfo_RoleInfoDal)
         {
             this._userInfoDal = userInfoDal;
             this._mD5Encrypt1 = mD5Encrypt;
             this._departmentInfoDal = departmentInfoDal;
+            this._r_UserInfo_RoleInfoDal = r_UserInfo_RoleInfoDal;
         }
 
         /// <summary>
@@ -273,6 +276,15 @@ namespace BLL
         public List<SelectOptionsDto> GetSelectInfoBll()
         {
             return _userInfoDal.GetAll().Select(u => new SelectOptionsDto { Value = u.Id, Title = u.UserName }).ToList();
+        }
+        /// <summary>
+        /// 获取到当前角色拥有的用户
+        /// </summary>
+        /// <param name="RoleId">角色Id</param>
+        /// <returns></returns>
+        public List<string> GetBindUserInfo(string RoleId)
+        {
+            return _r_UserInfo_RoleInfoDal.GetAll().Where(r => r.RoleId.Equals(RoleId)).Select(r => r.UserId).ToList();
         }
         /// <summary>
         /// 校验修改用户基本信息数据

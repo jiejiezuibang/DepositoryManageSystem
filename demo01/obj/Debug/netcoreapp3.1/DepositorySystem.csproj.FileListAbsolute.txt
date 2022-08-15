@@ -401,3 +401,4 @@ G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\n
 G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\Razor\Views\RoleInfo\EditRoleInfoView.cshtml.g.cs
 G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\Razor\Views\Home\FrontView.cshtml.g.cs
 G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\Razor\Views\Home\UserBaseInfoView.cshtml.g.cs
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\Razor\Views\R_UserInfo_RoleInfo\BindUserView.cshtml.g.cs

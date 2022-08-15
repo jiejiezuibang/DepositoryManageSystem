@@ -74,5 +74,11 @@ namespace IDepositoryBll
         /// <param name="editUserBaseInfoDto">修改用户基本信息dto</param>
         /// <returns></returns>
         UserInfoEnums EditUserBaseInfoCheck(EditUserBaseInfoDto editUserBaseInfoDto);
+        /// <summary>
+        /// 获取当前角色拥有那些用户
+        /// </summary>
+        /// <param name="RoleId">角色Id</param>
+        /// <returns></returns>
+        List<string> GetBindUserInfo(string RoleId);
     }
 }

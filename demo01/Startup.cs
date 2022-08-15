@@ -63,6 +63,10 @@ namespace demo01
             services.AddScoped<IRoleInfoDal, RoleInfoDal>();
             // 注入角色管理bll服务
             services.AddScoped<IRoleInfoBll, RoleInfoBll>();
+            // 注入用户角色dal服务
+            services.AddScoped<IR_UserInfo_RoleInfoDal, R_UserInfo_RoleInfoDal>();
+            // 注入用户角色bll服务
+            services.AddScoped<IR_UserInfo_RoleInfoBll, R_UserInfo_RoleInfoBll>();
             return services;
         }
 

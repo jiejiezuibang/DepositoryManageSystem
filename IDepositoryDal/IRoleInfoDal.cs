@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IDepositoryDal
 {
-    public interface IRoleInfoDal:IBaseDal<RoleInfo>
+    public interface IRoleInfoDal: IDelRemoveDal<RoleInfo>
     {
     }
 }

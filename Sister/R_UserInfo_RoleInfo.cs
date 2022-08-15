@@ -8,13 +8,8 @@ namespace Sister
     /// <summary>
     /// 用户角色信息数据集
     /// </summary>
-    public class R_UserInfo_RoleInfo
+    public class R_UserInfo_RoleInfo:BaseSister
     {
-        /// <summary>
-        /// 主键Id
-        /// </summary>
-        [Column(TypeName = "varchar(36)")]
-        public string Id { get; set; }
 
         /// <summary>
         /// 用户账号
@@ -31,6 +26,6 @@ namespace Sister
         /// <summary>
         /// 添加时间
         /// </summary>
-        public string CreateTime { get; set; }
+        public DateTime CreateTime { get; set; }
     }
 }

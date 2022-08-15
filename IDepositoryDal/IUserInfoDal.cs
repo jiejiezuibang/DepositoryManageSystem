@@ -10,7 +10,7 @@ namespace IDepositoryDal
     /// <summary>
     /// 用户管理接口
     /// </summary>
-    public interface IUserInfoDal: IBaseDal<UserInfo>
+    public interface IUserInfoDal: IDelRemoveDal<UserInfo>
     {
     }
 }
