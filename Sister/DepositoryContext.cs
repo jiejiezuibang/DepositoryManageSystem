@@ -32,6 +32,14 @@ namespace Sister
         /// 用户角色数据集
         /// </summary>
         public DbSet<R_UserInfo_RoleInfo> R_UserInfo_RoleInfos { get; set; }
+        /// <summary>
+        /// 菜单信息数据集
+        /// </summary>
+        public DbSet<MenuInfo> MenuInfos { get; set; }
+        /// <summary>
+        /// 角色权限数据集
+        /// </summary>
+        public DbSet<R_RoleInfo_MenuInfo> R_RoleInfo_MenuInfos { get; set; }
         //protected override void OnConfiguring(DbContextOptionsBuilder options)
         //=> options.UseSqlServer($"server=DESKTOP-FSDTD8V\\SQLEXPRESS;database=DepositoryManageSystem;uid=sa;pwd=123");
     }

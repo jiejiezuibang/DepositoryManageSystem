@@ -16,9 +16,14 @@ namespace DepositoryServer.Controllers
         /// 注入角色管理逻辑层对象
         /// </summary>
         private readonly IRoleInfoBll _roleInfoBll;
-        public RoleInfoController(IRoleInfoBll roleInfoBll)
+        /// <summary>
+        /// 注入菜单管理逻辑层对象
+        /// </summary>
+        private readonly IMenuInfoBll _menuInfoBll;
+        public RoleInfoController(IRoleInfoBll roleInfoBll,IMenuInfoBll menuInfoBll)
         {
             this._roleInfoBll = roleInfoBll;
+            this._menuInfoBll = menuInfoBll;
         }
         /// <summary>
         ///展示角色信息主页面接口

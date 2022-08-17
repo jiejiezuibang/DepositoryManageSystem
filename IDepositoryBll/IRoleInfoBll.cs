@@ -42,5 +42,7 @@ namespace IDepositoryBll
         /// <param name="Id">角色Id</param>
         /// <returns></returns>
         Task<RoleInfo> FindRoleInfo(string Id);
+        List<string> FindRoleBindMenuInfo(string RoleId);
+        Task<RoleInfoEnums> BindMenuInfo(string RoleId, string[] MenuIds);
     }
 }

@@ -65,6 +65,7 @@ namespace DepositoryServer.Controllers
                 case AccoutnLoginEnums.loginSuccess:
                     // 设置session
                     HttpContext.Session.SetString("account", Account);
+                    HttpContext.Session.SetString("userId", Id);
                     ajaxResult.code = 200;
                     ajaxResult.msg = "登录成功";
                     ajaxResult.data = new { UserName,Id};

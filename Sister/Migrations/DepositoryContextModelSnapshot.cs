@@ -84,6 +84,68 @@ namespace Sister.Migrations
                     b.ToTable("FileInfos");
                 });
 
+            modelBuilder.Entity("Sister.MenuInfo", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DeleteTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(32)");
+
+                    b.Property<string>("Href")
+                        .HasColumnType("varchar(128)");
+
+                    b.Property<string>("Icon")
+                        .HasColumnType("varchar(32)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ParentId")
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<int>("Sort")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Target")
+                        .HasColumnType("varchar(16)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(16)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MenuInfos");
+                });
+
+            modelBuilder.Entity("Sister.R_RoleInfo_MenuInfo", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MenuId")
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("varchar(36)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("R_RoleInfo_MenuInfos");
+                });
+
             modelBuilder.Entity("Sister.R_UserInfo_RoleInfo", b =>
                 {
                     b.Property<string>("Id")

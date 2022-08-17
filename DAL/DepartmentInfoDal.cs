@@ -21,6 +21,7 @@ namespace DAL
         {
             this._depositoryContext = depositoryContext;
         }
+
         ///// <summary>
         ///// 添加部门
         ///// </summary>

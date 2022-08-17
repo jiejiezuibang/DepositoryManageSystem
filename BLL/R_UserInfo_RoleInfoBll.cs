@@ -56,7 +56,6 @@ namespace BLL
             //绑定角色
             if (bindUserDto.UserId != null)
             {
-                
                 foreach (string item in bindUserDto.UserId)
                 {
                     // 判断指定角色是否存在指定用户

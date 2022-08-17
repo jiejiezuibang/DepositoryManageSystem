@@ -67,6 +67,12 @@ namespace demo01
             services.AddScoped<IR_UserInfo_RoleInfoDal, R_UserInfo_RoleInfoDal>();
             // 注入用户角色bll服务
             services.AddScoped<IR_UserInfo_RoleInfoBll, R_UserInfo_RoleInfoBll>();
+            // 注入菜单信息dal服务
+            services.AddScoped<IMenuInfoDal, MenuInfoDal>();
+            // 注入菜单信息bll服务
+            services.AddScoped<IMenuInfoBll, MenuInfoBll>();
+            // 注入角色权限dal服务
+            services.AddScoped<IR_RoleInfo_MenuInfoDal, R_RoleInfo_MenuInfoDal>();
             return services;
         }
 

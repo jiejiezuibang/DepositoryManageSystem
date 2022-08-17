@@ -53,5 +53,17 @@ namespace Common.ResultEnums
         /// 操作角色失败
         /// </summary>
         RoleInfoError,
+        /// <summary>
+        /// 角色Id为空
+        /// </summary>
+        RoleIdIsNull,
+        /// <summary>
+        /// 绑定菜单成功
+        /// </summary>
+        BindMenuSuccess,
+        /// <summary>
+        /// 绑定菜单失败
+        /// </summary>
+        BindMenuError,
     }
 }

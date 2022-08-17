@@ -25,24 +25,6 @@
                                 </div>
                             </div>
                             <div class="layui-inline">
-                                <label class="layui-form-label">用户性别</label>
-                                <div class="layui-input-inline">
-                                    <input type="text" name="sex" autocomplete="off" class="layui-input">
-                                </div>
-                            </div>
-                            <div class="layui-inline">
-                                <label class="layui-form-label">用户城市</label>
-                                <div class="layui-input-inline">
-                                    <input type="text" name="city" autocomplete="off" class="layui-input">
-                                </div>
-                            </div>
-                            <div class="layui-inline">
-                                <label class="layui-form-label">用户职业</label>
-                                <div class="layui-input-inline">
-                                    <input type="text" name="classify" autocomplete="off" class="layui-input">
-                                </div>
-                            </div>
-                            <div class="layui-inline">
                                 <button type="submit" class="layui-btn layui-btn-primary" lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
                             </div>
                         </div>
@@ -65,6 +47,10 @@
                 <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="AssigningRoles">
                     <i class="layui-icon">&#xe654;</i>
                     分配角色
+                </a>
+                <a class="layui-btn layui-btn-xs" lay-event="BindMenu">
+                    <i class="layui-icon">&#xe654;</i>
+                    绑定菜单
                 </a>
             </script>
 
@@ -249,6 +235,17 @@
                         maxmin: true,
                         area: ['510px','510px'],
                         content: '/R_UserInfo_RoleInfo/BindUserView',
+                    });
+                }
+                else if (obj.event === 'BindMenu') {
+                    RoleInfoId = data.id;
+                    layer.open({
+                        title: '绑定菜单',
+                        type: 2,
+                        shade: 0.2,
+                        maxmin: true,
+                        area: ['510px', '510px'],
+                        content: '/R_RoleInfo_MenuInfo/BindMenuView',
                     });
                 }
             });

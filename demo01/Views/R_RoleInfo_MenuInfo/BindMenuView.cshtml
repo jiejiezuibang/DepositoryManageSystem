@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/layuimini/lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuimini/css/public.css" media="all">
+</head>
+<body>
+    <div>
+        <!-- 穿梭框 -->
+        <div id="ShuttleBox">
+
+        </div>
+        <button style="margin-left: 193px;margin-top:15px;margin-bottom:15px;" id="BindMenuInfo" class="layui-btn layui-btn-normal">确认保存</button>
+    </div>
+    <script src="/layuimini/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+    <script>
+        layui.use(['form', 'transfer'], function () {
+            var $ = layui.jquery;
+            var transfer = layui.transfer;
+
+           // 渲染穿梭框
+            $.ajax({
+                url: '/MenuInfo/GetShuttleBoxMenuInfo',
+                type: 'get',
+                data: { RoleId: parent.RoleInfoId },
+                success: function (res) {
+                    console.log(res.menuIdList)
+                    //渲染穿梭框
+                    transfer.render({
+                        elem: '#ShuttleBox'  //绑定元素
+                        , showSearch: true
+                        , title: ['待绑定菜单', '已绑定菜单']
+                        , data: res.data.selectOptionsDtos
+                        , value: res.data.menuIdList
+                        , id: 'ShuttleBoxData' //定义索引
+                    });
+                }
+            })
+
+
+            // 确认保存穿梭框的数据
+            $("#BindMenuInfo").click(function () {
+                // 获取当前角色Id
+                var RoleId = parent.RoleInfoId
+                // 获取选中角色Id
+                var MenuIds = []
+                // 循环获取菜单Id
+                var ShuttleBoxData = transfer.getData('ShuttleBoxData');
+                for (var i = 0; i < ShuttleBoxData.length; i++) {
+                    MenuIds.push(ShuttleBoxData[i].value)
+                }
+                // 发起ajax绑定角色
+                $.ajax({
+                    url: '/R_RoleInfo_MenuInfo/BindMenu',
+                    type: 'post',
+                    data: {
+                        RoleId: RoleId,
+                        MenuIds: MenuIds
+                    },
+                    success: function (res) {
+                        if (res.code == 200) {
+                            layer.msg(res.msg)
+                        } else {
+                            layer.msg(res.msg)
+                        }
+                    }
+                })
+            })
+
+        });
+    </script>
+</body>
+</html>
