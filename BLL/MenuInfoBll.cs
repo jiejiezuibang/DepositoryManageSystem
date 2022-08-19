@@ -43,10 +43,11 @@ namespace BLL
                 .Where(m => !m.IsDelete)
                 .OrderBy(m => m.Sort)
                                                    join b in _menuInfoDal.GetAll()
-                                                   on a.Id equals b.ParentId
+                                                   on a.ParentId equals b.Id
                                                    into c from d in c.DefaultIfEmpty()
                                                    select new MenuInfoDto
                                                    {
+                                                       Id = a.Id,
                                                        Title = a.Title,
                                                        Description = a.Description,
                                                        Level = a.Level,
@@ -158,6 +159,7 @@ namespace BLL
         {
             return await _menuInfoDal.GetAll().FindAsync(Id);
         }
+        
         /// <summary>
         /// 获取要侧边栏要展示的数据
         /// </summary>
@@ -165,17 +167,75 @@ namespace BLL
         public List<HomeMenuDto> GetMenuData(string UserId)
         {
             // 获取到用户拥有的角色
-            List<string> RoleIds  = _r_UserInfo_RoleInfoDal.GetAll().Where(r => r.UserId.Equals(UserId)).Select(r => r.RoleId).ToList();
+            List<string> RoleIds = _r_UserInfo_RoleInfoDal.GetAll().Where(r => r.UserId.Equals(UserId)).Select(r => r.RoleId).ToList();
             // 查询角色拥有啥菜单
-            List<string> MenuIds = _r_RoleInfo_MenuInfoDal.GetAll().Where(r => RoleIds.Contains(r.RoleId)).Select(r => r.MenuId).ToList(); ;
+            List<string> MenuIds = _r_RoleInfo_MenuInfoDal.GetAll().Where(r => RoleIds.Contains(r.RoleId)).Select(r => r.MenuId).ToList();
 
-            return _menuInfoDal.GetAll().OrderBy(m => m.Sort).Where(m => !m.IsDelete && MenuIds.Contains(m.Id)).Select(m => new HomeMenuDto
+            // // 获取到等级为0的根目录，然后循环遍历
+            //return await _menuInfoDal.GetAll()
+            //     .Where(m => m.Level.Equals(0) && !m.IsDelete)
+            //     .OrderBy(m => m.Sort)
+            //     .Select(m => new HomeMenuDto
+            //     {
+            //         Id = m.Id,
+            //         Title = m.Title,
+            //         Href = m.Href,
+            //         Icon = m.Icon,
+            //         Target = m.Target
+            //     }).ForEachAsync(async fatherMenu =>
+            //     {
+            //          fatherMenu.Child = _menuInfoDal.GetAll()
+            //         .OrderBy(m => m.Sort)
+            //         .Where(m => m.ParentId.Equals(fatherMenu.Id))
+            //         .Select(m => new HomeMenuDto
+            //         {
+            //             Title = m.Title,
+            //             Href = m.Href,
+            //             Icon = m.Icon,
+            //             Target = m.Target
+            //         }).ToList();
+            //     });
+
+            // 查出来拥有什么菜单
+           List<MenuInfo> menuInfos =  _menuInfoDal.GetAll().Where(m => MenuIds.Contains(m.Id)&&!m.IsDelete).ToList();
+
+            // 获取到顶级的根节点菜单
+            List<HomeMenuDto> fatherMenus = menuInfos
+                .Where(m => m.Level.Equals(0)&&!m.IsDelete)
+                .OrderBy(m => m.Sort)
+                .Select(m => new HomeMenuDto
+                {
+                    Id = m.Id,
+                    Title = m.Title,
+                    Href = m.Href,
+                    Icon = m.Icon,
+                    Target = m.Target
+                }).ToList();
+            GetChildMenus(fatherMenus, menuInfos);
+            return fatherMenus;
+        }
+        // 获取子节点
+        public void GetChildMenus(List<HomeMenuDto> fatherMenus, List<MenuInfo> menuInfos)
+        {
+            // 循环遍历对应更节点下的子菜单
+            foreach (var fatherMenu in fatherMenus)
             {
-                Title = m.Title,
-                Href = m.Href,
-                Target = m.Target,
-                Icon = m.Icon
-            }).ToList();
+                // 获取到子菜单
+                List<HomeMenuDto> homeMenuDtos = menuInfos
+                    .Where(m => m.ParentId == fatherMenu.Id)
+                    .Select(m => new HomeMenuDto
+                    {
+                        Id = m.Id,
+                        Title = m.Title,
+                        Href = m.Href,
+                        Icon = m.Icon,
+                        Target = m.Target
+                    }).ToList();
+                GetChildMenus(homeMenuDtos, menuInfos);
+                // 赋值子菜单
+                fatherMenu.Child = homeMenuDtos;
+
+            }
         }
     }
 }

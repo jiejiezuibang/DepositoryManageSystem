@@ -19,6 +19,65 @@ namespace Sister.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Sister.Category", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("nvarchar(16)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(36)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("Sister.ConsumableInfo", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<string>("CategoryId")
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<string>("ConsumableName")
+                        .HasColumnType("nvarchar(16)");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DeleteTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(32)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("Money")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Num")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Specification")
+                        .HasColumnType("nvarchar(32)");
+
+                    b.Property<string>("Unit")
+                        .HasColumnType("nvarchar(8)");
+
+                    b.Property<int>("WarningNum")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ConsumableInfos");
+                });
+
             modelBuilder.Entity("Sister.DepartmentInfo", b =>
                 {
                     b.Property<string>("Id")

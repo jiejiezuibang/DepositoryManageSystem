@@ -406,3 +406,9 @@ G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\n
 G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\Razor\Views\MenuInfo\EditMenuInfoView.cshtml.g.cs
 G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\Razor\Views\R_RoleInfo_MenuInfo\BindMenuView.cshtml.g.cs
 G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\DepositoryServer.MvcApplicationPartsAssemblyInfo.cs
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\Razor\Views\Category\CategoryView.cshtml.g.cs
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\Razor\Views\ConsumableInfo\AddConsumableInfoView.cshtml.g.cs
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\Razor\Views\ConsumableInfo\ConsumableInfoView.cshtml.g.cs
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\Razor\Views\ConsumableInfo\EditAConsumableInfoView.cshtml.g.cs
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\Razor\Views\Category\AddCategoryView.cshtml.g.cs
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\Razor\Views\Category\EditCategoryView.cshtml.g.cs

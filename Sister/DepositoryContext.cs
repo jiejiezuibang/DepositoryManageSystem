@@ -40,6 +40,14 @@ namespace Sister
         /// 角色权限数据集
         /// </summary>
         public DbSet<R_RoleInfo_MenuInfo> R_RoleInfo_MenuInfos { get; set; }
+        /// <summary>
+        /// 耗材信息表
+        /// </summary>
+        public DbSet<ConsumableInfo> ConsumableInfos { get; set; }
+        /// <summary>
+        /// 耗材类别表
+        /// </summary>
+        public DbSet<Category> Categories { get; set; }
         //protected override void OnConfiguring(DbContextOptionsBuilder options)
         //=> options.UseSqlServer($"server=DESKTOP-FSDTD8V\\SQLEXPRESS;database=DepositoryManageSystem;uid=sa;pwd=123");
     }

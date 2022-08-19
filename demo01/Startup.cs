@@ -73,6 +73,14 @@ namespace demo01
             services.AddScoped<IMenuInfoBll, MenuInfoBll>();
             // 注入角色权限dal服务
             services.AddScoped<IR_RoleInfo_MenuInfoDal, R_RoleInfo_MenuInfoDal>();
+            // 注入耗材信息dal服务
+            services.AddScoped<IConsumableInfoDal, ConsumableInfoDal>();
+            // 注入耗材信息bll服务
+            services.AddScoped<IConsumableInfoBll, ConsumableInfoBll>();
+            // 注入耗材类别dal服务
+            services.AddScoped<ICategoryDal, CategoryDal>();
+            // 注入耗材类别bll服务
+            services.AddScoped<ICategoryBll, CategoryBll>();
             return services;
         }
 

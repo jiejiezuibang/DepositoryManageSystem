@@ -7,6 +7,10 @@ namespace Sister.Dtos.MenuInfo
     public class HomeMenuDto
     {
         /// <summary>
+        /// 菜单Id
+        /// </summary>
+        public string Id { get; set; }
+        /// <summary>
         /// 标题
         /// </summary>
         public string Title { get; set; }

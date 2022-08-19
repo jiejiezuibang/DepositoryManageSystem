@@ -109,6 +109,7 @@ namespace DepositoryServer.Controllers
         {
             // 清除指定的session
             HttpContext.Session.Remove("account");
+            HttpContext.Session.Remove("userId");
             return Json(new AjaxResult
             {
                 code = 200,
