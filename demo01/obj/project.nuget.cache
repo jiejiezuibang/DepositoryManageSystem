@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "/WWLSy/at5D7gSjw4/FZgBe+W2WbCQ387lFvVjh7U6npmIYBID3KiKimB7w67czuVTOwLERd1IuA2XPZl7Kjcg==",
+  "dgSpecHash": "f89ThBAGmW6YpS0dj3nIeS3X8xHSI+hRtFT/b4OJfLyb6RlbM4uFG7qAhk5Vtd3bodZfiuiD/iR3Q9L91BcjvA==",
   "success": true,
   "projectFilePath": "G:\\20级水电.NET开发一班覃坤\\实训项目\\demo\\demo01\\demo01\\DepositorySystem.csproj",
   "expectedPackageFiles": [
@@ -67,7 +67,10 @@
     "C:\\Users\\lyq\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\lyq\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\lyq\\.nuget\\packages\\newtonsoft.json\\10.0.1\\newtonsoft.json.10.0.1.nupkg.sha512",
+    "C:\\Users\\lyq\\.nuget\\packages\\npoi\\2.5.6\\npoi.2.5.6.nupkg.sha512",
+    "C:\\Users\\lyq\\.nuget\\packages\\portable.bouncycastle\\1.8.9\\portable.bouncycastle.1.8.9.nupkg.sha512",
     "C:\\Users\\lyq\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
+    "C:\\Users\\lyq\\.nuget\\packages\\sharpziplib\\1.3.3\\sharpziplib.1.3.3.nupkg.sha512",
     "C:\\Users\\lyq\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
     "C:\\Users\\lyq\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
     "C:\\Users\\lyq\\.nuget\\packages\\system.collections.concurrent\\4.3.0\\system.collections.concurrent.4.3.0.nupkg.sha512",

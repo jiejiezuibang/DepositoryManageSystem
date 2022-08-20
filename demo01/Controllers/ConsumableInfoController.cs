@@ -1,10 +1,12 @@
 ﻿using Common.ResultEnums;
 using IDepositoryBll;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Sister.Dtos.ConsumabelInfo;
 using Sister.Tools;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -157,6 +159,33 @@ namespace DepositoryServer.Controllers
                 msg = "获取当前耗材信息成功",
                 data = await _consumableInfoBll.FindConsumabelInfoBll(Id)
             });
+        }
+        /// <summary>
+        /// 耗材入库接口
+        /// </summary>
+        /// <param name="formFile"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> Warehousing(IFormFile formFile)
+        {
+            AjaxResult ajaxResult = new AjaxResult();
+            // 获取到当前登录用户Id
+            string userId = HttpContext.Session.GetString("userId");
+            switch(await _consumableInfoBll.WarehousingBll(formFile, userId))
+            {
+                case ConsumableInfoEnums.WarehousingSuccess:
+                    ajaxResult.code = 200;
+                    ajaxResult.msg = "入库成功";
+                    break;
+                case ConsumableInfoEnums.WarehousingError:
+                    ajaxResult.code = 500;
+                    ajaxResult.msg = "入库失败";
+                    break;
+                case ConsumableInfoEnums.FileTypeErro:
+                    ajaxResult.code = 500;
+                    ajaxResult.msg = "文件格式错误，请上传excel文件";
+                    break;
+            }
+            return Json(ajaxResult);
         }
     }
 }

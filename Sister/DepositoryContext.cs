@@ -48,6 +48,10 @@ namespace Sister
         /// 耗材类别表
         /// </summary>
         public DbSet<Category> Categories { get; set; }
+        /// <summary>
+        /// 耗材信息数据集
+        /// </summary>
+        public DbSet<ConsumableRecord> ConsumableRecords { get; set; }
         //protected override void OnConfiguring(DbContextOptionsBuilder options)
         //=> options.UseSqlServer($"server=DESKTOP-FSDTD8V\\SQLEXPRESS;database=DepositoryManageSystem;uid=sa;pwd=123");
     }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "UszRu5TfGi9QiLYML58ccBZmMUjcQpTlRFs+i31XAtJR3cKrmXsAjSy8uenWIGdd0K+TWPGJxF/1KZylIaa/HQ==",
+  "dgSpecHash": "4cRlol/RO+Q33GTnk9WBIpALGpi5vC9oOFaHaAdROz/4R1bzgxNrDUaoWMYoVOxlN4Vvqocf7Ht872Ep1ZBy9Q==",
   "success": true,
   "projectFilePath": "G:\\20级水电.NET开发一班覃坤\\实训项目\\demo\\demo01\\BLL\\BLL.csproj",
   "expectedPackageFiles": [
@@ -54,7 +54,10 @@
     "C:\\Users\\lyq\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\lyq\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\lyq\\.nuget\\packages\\newtonsoft.json\\10.0.1\\newtonsoft.json.10.0.1.nupkg.sha512",
+    "C:\\Users\\lyq\\.nuget\\packages\\npoi\\2.5.6\\npoi.2.5.6.nupkg.sha512",
+    "C:\\Users\\lyq\\.nuget\\packages\\portable.bouncycastle\\1.8.9\\portable.bouncycastle.1.8.9.nupkg.sha512",
     "C:\\Users\\lyq\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
+    "C:\\Users\\lyq\\.nuget\\packages\\sharpziplib\\1.3.3\\sharpziplib.1.3.3.nupkg.sha512",
     "C:\\Users\\lyq\\.nuget\\packages\\system.appcontext\\4.1.0\\system.appcontext.4.1.0.nupkg.sha512",
     "C:\\Users\\lyq\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
     "C:\\Users\\lyq\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",

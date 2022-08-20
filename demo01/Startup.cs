@@ -81,6 +81,8 @@ namespace demo01
             services.AddScoped<ICategoryDal, CategoryDal>();
             // 注入耗材类别bll服务
             services.AddScoped<ICategoryBll, CategoryBll>();
+            // 注入耗材记录dal服务
+            services.AddScoped<IConsumableRecordDal, ConsumableRecordDal>();
             return services;
         }
 

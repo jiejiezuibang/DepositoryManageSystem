@@ -30,5 +30,17 @@ namespace Common.ResultEnums
         /// 修改耗材信息失败
         /// </summary>
         EditCoumableInfoError,
+        /// <summary>
+        /// 入库成功
+        /// </summary>
+        WarehousingSuccess,
+        /// <summary>
+        /// 入库失败
+        /// </summary>
+        WarehousingError,
+        /// <summary>
+        /// 文件类型错误
+        /// </summary>
+        FileTypeErro,
     }
 }

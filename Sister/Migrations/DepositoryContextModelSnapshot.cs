@@ -78,6 +78,31 @@ namespace Sister.Migrations
                     b.ToTable("ConsumableInfos");
                 });
 
+            modelBuilder.Entity("Sister.ConsumableRecord", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<string>("ConsumableId")
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Creator")
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<int>("Num")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ConsumableRecords");
+                });
+
             modelBuilder.Entity("Sister.DepartmentInfo", b =>
                 {
                     b.Property<string>("Id")

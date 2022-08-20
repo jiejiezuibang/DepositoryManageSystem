@@ -7,3 +7,4 @@ G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\Tools\obj\Debug\ne
 G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\Tools\obj\Debug\netcoreapp3.1\Common.csproj.CoreCompileInputs.cache
 G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\Tools\obj\Debug\netcoreapp3.1\Common.dll
 G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\Tools\obj\Debug\netcoreapp3.1\Common.pdb
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\Tools\obj\Debug\netcoreapp3.1\Common.csproj.AssemblyReference.cache

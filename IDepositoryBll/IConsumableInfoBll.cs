@@ -1,4 +1,5 @@
 ﻿using Common.ResultEnums;
+using Microsoft.AspNetCore.Http;
 using Sister;
 using Sister.Dtos.ConsumabelInfo;
 using Sister.Dtos.UserInfo;
@@ -16,5 +17,6 @@ namespace IDepositoryBll
         Task<ConsumableInfoEnums> EditConsumabelInfoBll(EditConsumabelInfoDto editConsumabelInfoDto);
         List<ConsumabelInfoDto> GetConsumabelInfoShow(FindConsumabelInfoDto findConsumabelInfoDto);
         Task<ConsumableInfo> FindConsumabelInfoBll(string Id);
+        Task<ConsumableInfoEnums> WarehousingBll(IFormFile formFile, string UserId);
     }
 }

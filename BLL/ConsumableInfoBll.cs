@@ -1,11 +1,16 @@
 ﻿using Common.ResultEnums;
 using IDepositoryBll;
 using IDepositoryDal;
+using Microsoft.AspNetCore.Http;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
 using Sister;
 using Sister.Dtos.ConsumabelInfo;
 using Sister.Dtos.UserInfo;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,10 +27,15 @@ namespace BLL
         /// 注入耗材类别dal对象
         /// </summary>
         private readonly ICategoryDal _categoryDal;
-        public ConsumableInfoBll(IConsumableInfoDal consumableInfoDal, ICategoryDal categoryDal)
+        /// <summary>
+        /// 注入耗材记录dal对象
+        /// </summary>
+        private readonly IConsumableRecordDal _consumableRecordDal;
+        public ConsumableInfoBll(IConsumableInfoDal consumableInfoDal, ICategoryDal categoryDal, IConsumableRecordDal consumableRecordDal)
         {
             this._consumableInfoDal = consumableInfoDal;
             this._categoryDal = categoryDal;
+            this._consumableRecordDal = consumableRecordDal;
         }
         public async Task<ConsumableInfoEnums> AddConsumabelInfoBll(AddConsumabelInfoDto addConsumabelInfoDto)
         {
@@ -130,6 +140,64 @@ namespace BLL
         public async Task<ConsumableInfo> FindConsumabelInfoBll(string Id)
         {
             return await _consumableInfoDal.GetAll().FindAsync(Id);
+        }
+        /// <summary>
+        /// 耗材入库业务
+        /// </summary>
+        /// <param name="formFile"></param>
+        public async Task<ConsumableInfoEnums> WarehousingBll(IFormFile formFile,string UserId)
+        {
+            IWorkbook wk = null;
+            // 获取文件的后缀名
+            string extension = Path.GetExtension(formFile.FileName);
+            if(extension == ".xls"|| extension == ".xlsx")
+            {
+                using (Stream stream = formFile.OpenReadStream())
+                {
+                    // 判断文件后缀名
+                    if (extension.Equals(".xls"))
+                    {
+                        wk = new HSSFWorkbook(stream);
+                    }
+                    else
+                    {
+                        wk = new XSSFWorkbook(stream);
+                    }
+                }
+                // 获取第一张表数据
+                ISheet sheet = wk.GetSheetAt(0);
+                for(int i = 1; i <= sheet.LastRowNum; i++)
+                {
+                    // 获取对应行的前三个格子文本
+                    string cell_1 = sheet.GetRow(i).GetCell(0).ToString(); // 名称
+                    string cell_3 = sheet.GetRow(i).GetCell(2).ToString(); // 实际购买数量
+                    string cell_4 = sheet.GetRow(i).GetCell(3).ToString(); // 规格
+
+                    int num = 0;
+                    int.TryParse(cell_3, out num);
+                    // 获取对应耗材Id
+                    var consumable = _consumableInfoDal.GetAll().FirstOrDefault(c => c.ConsumableName.Equals(cell_1));
+                    if (consumable != null)
+                    {
+                        // 创建耗材记录对象并赋值
+                        ConsumableRecord consumableRecord = new ConsumableRecord()
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            ConsumableId = consumable.Id,
+                            CreateTime = DateTime.Now,
+                            Num = Convert.ToInt32(cell_3),
+                            Creator = UserId,
+                        };
+                        // 执行添加操作
+                        await _consumableRecordDal.AddAsync(consumableRecord);
+                    }
+                }
+                return ConsumableInfoEnums.WarehousingSuccess;
+            }
+            else
+            {
+                return ConsumableInfoEnums.FileTypeErro;
+            }
         }
     }
 }
