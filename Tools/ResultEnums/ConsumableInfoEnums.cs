@@ -41,6 +41,10 @@ namespace Common.ResultEnums
         /// <summary>
         /// 文件类型错误
         /// </summary>
-        FileTypeErro,
+        FileTypeError,
+        /// <summary>
+        /// 文件数据不对
+        /// </summary>
+        FileDataError,
     }
 }

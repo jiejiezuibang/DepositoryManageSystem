@@ -5,6 +5,7 @@ using Sister.Dtos.ConsumabelInfo;
 using Sister.Dtos.UserInfo;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,6 +18,7 @@ namespace IDepositoryBll
         Task<ConsumableInfoEnums> EditConsumabelInfoBll(EditConsumabelInfoDto editConsumabelInfoDto);
         List<ConsumabelInfoDto> GetConsumabelInfoShow(FindConsumabelInfoDto findConsumabelInfoDto);
         Task<ConsumableInfo> FindConsumabelInfoBll(string Id);
-        Task<ConsumableInfoEnums> WarehousingBll(IFormFile formFile, string UserId);
+        ConsumableInfoEnums WarehousingBll(IFormFile formFile, string UserId, out string msg);
+        FileStream OutOfStockBll();
     }
 }

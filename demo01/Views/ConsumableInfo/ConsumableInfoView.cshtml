@@ -37,9 +37,8 @@
                 <div class="layui-btn-container">
                     <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加 </button>
                     <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除 </button>
-                    <button type="button" class="layui-btn" id="addFile">
-                        <i class="layui-icon">&#xe67c;</i>入库
-                    </button>
+                    <button type="button" class="layui-btn" id="addFile">入库</button>
+                    <button type="button" class="layui-btn" id="exportExcel">导出</button>
                 </div>
             </script>
 
@@ -242,7 +241,16 @@
                 , field:'formFile'
                 , done: function (res) {
                     if (res.code == 200) {
-                        layer.msg(res.msg)
+                        layer.msg(res.msg, function () {
+                            //执行搜索重载
+                            table.reload('currentTableId', {
+                                page: {
+                                    curr: 1
+                                }
+                                , where: {
+                                }
+                            });
+                        })
                     } else {
                         layer.msg(res.msg)
                     }
@@ -251,6 +259,11 @@
                     //请求异常回调
                 }
             });
+
+            // 点击导出按钮
+            $('#exportExcel').click(function () {
+                window.location = '/ConsumableInfo/OutOfStock'
+            })
         });</script>
 
 </body>

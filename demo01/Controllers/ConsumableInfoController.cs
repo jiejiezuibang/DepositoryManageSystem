@@ -165,27 +165,37 @@ namespace DepositoryServer.Controllers
         /// </summary>
         /// <param name="formFile"></param>
         /// <returns></returns>
-        public async Task<IActionResult> Warehousing(IFormFile formFile)
+        public IActionResult Warehousing(IFormFile formFile)
         {
             AjaxResult ajaxResult = new AjaxResult();
             // 获取到当前登录用户Id
             string userId = HttpContext.Session.GetString("userId");
-            switch(await _consumableInfoBll.WarehousingBll(formFile, userId))
+            switch(_consumableInfoBll.WarehousingBll(formFile, userId,out string msg))
             {
                 case ConsumableInfoEnums.WarehousingSuccess:
                     ajaxResult.code = 200;
-                    ajaxResult.msg = "入库成功";
                     break;
                 case ConsumableInfoEnums.WarehousingError:
                     ajaxResult.code = 500;
-                    ajaxResult.msg = "入库失败";
                     break;
-                case ConsumableInfoEnums.FileTypeErro:
+                case ConsumableInfoEnums.FileTypeError:
                     ajaxResult.code = 500;
-                    ajaxResult.msg = "文件格式错误，请上传excel文件";
+                    break;
+                case ConsumableInfoEnums.FileDataError:
+                    ajaxResult.code = 500;
                     break;
             }
+            ajaxResult.msg = msg;
             return Json(ajaxResult);
+        }
+        /// <summary>
+        /// 耗材记录出库接口
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult OutOfStock()
+        {
+            //Stream fileStream, string contentType, string fileDownloadName
+            return File(_consumableInfoBll.OutOfStockBll(), "application/octet-stream", "jiejiehaobang.xlsx");
         }
     }
 }
