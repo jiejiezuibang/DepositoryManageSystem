@@ -418,3 +418,10 @@ G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\bin\Debug\n
 G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\bin\Debug\netcoreapp3.1\NPOI.dll
 G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
 G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\bin\Debug\netcoreapp3.1\ICSharpCode.SharpZipLib.dll
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\Razor\Views\WorkFlow_Model\WorkFlow_ModelView.cshtml.g.cs
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\Razor\Views\WorkFlow_Model\AddWorkFlow_ModelView.cshtml.g.cs
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\Razor\Views\WorkFlow_Model\EditWorkFlow_ModelView.cshtml.g.cs
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\Razor\Views\WorkFlow_Instance\AddWorkFlow_InstanceView.cshtml.g.cs
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\Razor\Views\WorkFlow_Instance\WorkFlow_InstanceView.cshtml.g.cs
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\Razor\Views\WorkFlow_InstanceStep\WorkFlow_InstanceStepView.cshtml.g.cs
+G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\demo01\obj\Debug\netcoreapp3.1\Razor\Views\WorkFlow_InstanceStep\EditWorkFlow_InstanceStepView.cshtml.g.cs

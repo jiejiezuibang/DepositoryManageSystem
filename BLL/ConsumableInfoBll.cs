@@ -323,12 +323,21 @@ namespace BLL
             }
             FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite);
             workbook.Write(fileStream);
-            fileStream.Close();
 
             // 获取指定文件的文件流
             FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
             
             return fs;
+        }
+        /// <summary>
+        /// 获取耗材信息作为下拉框的数据
+        /// </summary>
+        /// <returns></returns>
+        public List<SelectOptionsDto> GetSelectOptions()
+        {
+            return _consumableInfoDal.GetAll()
+                .Where(c => !c.IsDelete)
+                .Select(c => new SelectOptionsDto { Title = c.ConsumableName, Value = c.Id }).ToList();
         }
     }
 }

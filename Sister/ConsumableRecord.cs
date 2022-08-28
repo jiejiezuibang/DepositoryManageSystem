@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sister.Dtos.ConsumableRecord;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
@@ -25,7 +26,7 @@ namespace Sister
         /// <summary>
         /// Type
         /// </summary>
-        public int Type { get; set; }
+        public ConsumableRecordTypeEnums Type { get; set; }
 
         /// <summary>
         /// 添加时间

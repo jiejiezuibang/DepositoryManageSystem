@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sister.Dtos.Account;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
@@ -8,13 +9,8 @@ namespace Sister
     /// <summary>
     /// 文件信息数据集
     /// </summary>
-    public class FileInfo
+    public class FileInfo:BaseSister
     {
-        /// <summary>
-        /// 主键Id
-        /// </summary>
-        [Column(TypeName ="varchar(36)")]
-        public string Id { get; set; }
 
         /// <summary>
         /// 关系Id
@@ -43,21 +39,22 @@ namespace Sister
         /// <summary>
         /// 文件大小
         /// </summary>
-        public string Length { get; set; }
+        public long Length { get; set; }
 
         /// <summary>
         /// 添加时间
         /// </summary>
-        public string CreateTime { get; set; }
+        public DateTime CreateTime { get; set; }
 
         /// <summary>
         /// 添加人Id
         /// </summary>
+        [Column(TypeName = "varchar(36)")]
         public string Creator { get; set; }
 
         /// <summary>
         /// 类别
         /// </summary>
-        public string Category { get; set; }
+        public FileInfoCategoryEnums Category { get; set; }
     }
 }

@@ -165,6 +165,7 @@
                         // 给sessionStorage赋值
                         sessionStorage.setItem("userName", res.data.userName)
                         sessionStorage.setItem("id", res.data.id)
+                        sessionStorage.setItem("userAvatar", res.data.userAvater); // 用户头像
                         // 显示友好提示
                         layer.msg("登录成功", function () {
                             window.location.href = '/Home/MainView';

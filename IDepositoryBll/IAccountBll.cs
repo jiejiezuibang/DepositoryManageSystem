@@ -1,4 +1,5 @@
 ﻿using Common.ResultEnums;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -28,5 +29,7 @@ namespace IDepositoryBll
         /// <param name="account">账号</param>
         /// <returns></returns>
         AccoutnLoginEnums ResetPwdBll(string oldPwd, string newPwd, string verifyPwd, string account);
+        AccoutnLoginEnums UploadAvatarBll(IFormFile formFile, string userId, string wwwrootPath, out string msg, out string UserAvatar);
+        string GetUserAvaterBll(string userId);
     }
 }

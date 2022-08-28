@@ -139,7 +139,7 @@ namespace BLL
         public List<UserInfoDto> GetUserInfoBll(FindUserInfoDto findUserInfoDto, out int userInfoCount)
         {
             var userInfoList = (from a in _userInfoDal.GetAll()
-                                    .Where(a => a.IsDelete == false && a.Account != findUserInfoDto.LoginAccount)
+                                    .Where(a => a.IsDelete == false)
                                     .OrderByDescending(a => a.CreateTime)     // 降序排序
                                 join b in _departmentInfoDal.GetAll() // 连表(左连)
                                 on a.DepartmentId equals b.Id into JoinUserInfos

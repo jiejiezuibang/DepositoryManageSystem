@@ -1,0 +1,85 @@
+﻿@{ Layout = null;}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../layuimini/lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuimini/css/public.css" media="all">
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="layui-form layuimini-form" lay-filter="EditMenuForm">
+        <input type="hidden" name="Id" />
+        <div class="layui-form-item">
+            <label class="layui-form-label">标题</label>
+            <div class="layui-input-block">
+                <input type="text" name="Title" placeholder="请输入角色名称" value="" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">描述</label>
+            <div class="layui-input-block">
+                <textarea name="Description" placeholder="请输入内容" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
+            </div>
+        </div>
+    </div>
+    <script src="../layuimini/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+    <script>
+        layui.use(['form'], function () {
+            var form = layui.form,
+                layer = layui.layer,
+                $ = layui.$;
+
+            // 请求数据给表单赋值
+            $.ajax({
+                url: '/WorkFlow_Model/FindWorkFlow_Model',
+                type: 'get',
+                data: { Id: parent.WorkFlow_ModelId },
+                success: function (res) {
+                    if (res.code == 200) {
+                        // 给表单赋值
+                        form.val("EditMenuForm", { //formTest 即 class="layui-form" 所在元素属性 lay-filter="" 对应的值
+                            "Title": res.data.title // "name": "value"
+                            , 'Description': res.data.description
+                            , "Id": res.data.id
+                        });
+                    }
+                }
+            })
+
+            //监听提交
+            form.on('submit(saveBtn)', function (data) {
+                $.ajax({
+                    url: '/WorkFlow_Model/EidtWorkFlow_ModelBll',
+                    type: 'put',
+                    data: data.field,
+                    success: function (res) {
+                        if (res.code == 200) {
+                            // 销毁弹出层
+                            var iframeIndex = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(iframeIndex);
+                        } else {
+                            layer.alert(res.msg)
+                        }
+                    }
+                })
+                return false;
+            });
+
+        });</script>
+</body>
+</html>

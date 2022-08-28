@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Sister
 {
-    public class DepositoryContext:DbContext
+    public class DepositoryContext : DbContext
     {
         public DepositoryContext(DbContextOptions<DepositoryContext> options)
             : base(options)
@@ -52,6 +52,18 @@ namespace Sister
         /// 耗材信息数据集
         /// </summary>
         public DbSet<ConsumableRecord> ConsumableRecords { get; set; }
+        /// <summary>
+        /// 工作流模板数据集
+        /// </summary>
+        public DbSet<WorkFlow_Model> WorkFlow_Models { get; set; }
+        /// <summary>
+        ///  工作流步骤数据集
+        /// </summary>
+        public DbSet<WorkFlow_InstanceStep> WorkFlow_InstanceSteps { get; set; }
+        /// <summary>
+        /// 工作流实例数据集
+        /// </summary>
+        public DbSet<WorkFlow_Instance> WorkFlow_Instances { get; set; }
         //protected override void OnConfiguring(DbContextOptionsBuilder options)
         //=> options.UseSqlServer($"server=DESKTOP-FSDTD8V\\SQLEXPRESS;database=DepositoryManageSystem;uid=sa;pwd=123");
     }

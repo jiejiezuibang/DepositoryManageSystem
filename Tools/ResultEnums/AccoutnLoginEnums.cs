@@ -39,5 +39,7 @@ namespace Common.ResultEnums
         /// 重置密码成功
         /// </summary>
         ResetPwdSuccess,
+        UploadAvatarSucess,
+        UploadAvaterError,
     }
 }

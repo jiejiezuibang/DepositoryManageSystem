@@ -83,6 +83,22 @@ namespace demo01
             services.AddScoped<ICategoryBll, CategoryBll>();
             // 注入耗材记录dal服务
             services.AddScoped<IConsumableRecordDal, ConsumableRecordDal>();
+            // 注入耗材记录dal服务
+            services.AddScoped<IConsumableRecordDal, ConsumableRecordDal>();
+            // 注入工作流模板dal服务
+            services.AddScoped<IWorkFlow_ModelDal, WorkFlow_ModelDal>();
+            // 注入工作流模板bll服务
+            services.AddScoped<IWorkFlow_ModelBll, WorkFlow_ModelBll>();
+            // 注入工作流步骤dal服务
+            services.AddScoped<IWorkFlow_InstanceStepDal, WorkFlow_InstanceStepDal>();
+            // 注入工作流步骤bll服务
+            services.AddScoped<IWorkFlow_InstanceStepBll, WorkFlow_InstanceStepBll>();
+            // 注入工作流实例dal服务
+            services.AddScoped<IWorkFlow_InstanceDal, WorkFlow_InstanceDal>();
+            // 注入工作流实例bll服务
+            services.AddScoped<IWorkFlow_InstanceBll, WorkFlow_InstanceBll>();
+            // 注入文件信息dal服务
+            services.AddScoped<IFileInfoDal, FileInfoDal>();
             return services;
         }
 

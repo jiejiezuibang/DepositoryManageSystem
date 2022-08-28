@@ -20,5 +20,6 @@ namespace IDepositoryBll
         Task<ConsumableInfo> FindConsumabelInfoBll(string Id);
         ConsumableInfoEnums WarehousingBll(IFormFile formFile, string UserId, out string msg);
         FileStream OutOfStockBll();
+        List<SelectOptionsDto> GetSelectOptions();
     }
 }

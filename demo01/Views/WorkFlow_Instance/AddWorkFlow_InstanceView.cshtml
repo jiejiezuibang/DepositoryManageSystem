@@ -1,0 +1,100 @@
+﻿@{ Layout = null;}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../layuimini/lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuimini/css/public.css" media="all">
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="layui-form layuimini-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">模板</label>
+            <div class="layui-input-block">
+                <select name="ModelId">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">出库数量</label>
+            <div class="layui-input-block">
+                <input type="text" name="OutNum" placeholder="请输入出库数量" value="" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">出库物资</label>
+            <div class="layui-input-block">
+                <select name="OutGoodsId">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">申请理由</label>
+            <div class="layui-input-block">
+                <input type="text" name="Reason" placeholder="请输入申请理由" value="" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
+            </div>
+        </div>
+    </div>
+    <script src="../layuimini/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+    <script>
+        layui.use(['form'], function () {
+            var form = layui.form,
+                layer = layui.layer,
+                $ = layui.$;
+
+            $.ajax({
+                url: '/WorkFlow_Instance/GetSelectOptionsData',
+                type: 'get',
+                success: function (res) {
+                    if (res.code == 200) {
+                        $.each(res.data.wselectOptionsDtos, function (index, value) {
+                            $("[name='ModelId']").append(new Option(value.title, value.value))
+                        })
+                        $.each(res.data.cselectOptionsDtos, function (index, value) {
+                            $("[name='OutGoodsId']").append(new Option(value.title, value.value))
+                        })
+                        layui.form.render('select')
+                    }
+                }
+            })
+
+            //监听提交
+            form.on('submit(saveBtn)', function (data) {
+                $.ajax({
+                    url: '/WorkFlow_Instance/AddWorkFlow_Instance',
+                    type: 'post',
+                    data: data.field,
+                    success: function (res) {
+                        if (res.code == 200) {
+                            // 销毁弹出层
+                            var iframeIndex = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(iframeIndex);
+                        } else {
+                            layer.alert(res.msg)
+                        }
+                    }
+                })
+                return false;
+            });
+
+        });</script>
+</body>
+</html>

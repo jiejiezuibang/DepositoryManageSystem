@@ -139,20 +139,20 @@ namespace Sister.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("varchar(36)");
 
-                    b.Property<string>("Category")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Category")
+                        .HasColumnType("int");
 
-                    b.Property<string>("CreateTime")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Creator")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(36)");
 
                     b.Property<string>("Extension")
                         .HasColumnType("varchar(12)");
 
-                    b.Property<string>("Length")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long>("Length")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("NewFileName")
                         .HasColumnType("nvarchar(32)");
@@ -315,6 +315,96 @@ namespace Sister.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UserInfos");
+                });
+
+            modelBuilder.Entity("Sister.WorkFlow_Instance", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Creator")
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<string>("ModelId")
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<string>("OutGoodsId")
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<int>("OutNum")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Reason")
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WorkFlow_Instances");
+                });
+
+            modelBuilder.Entity("Sister.WorkFlow_InstanceStep", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<string>("BeforeStepId")
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("InstanceId")
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<string>("ReviewReason")
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<int>("ReviewStatus")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ReviewTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReviewerId")
+                        .HasColumnType("varchar(36)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WorkFlow_InstanceSteps");
+                });
+
+            modelBuilder.Entity("Sister.WorkFlow_Model", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DeleteTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(32)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WorkFlow_Models");
                 });
 #pragma warning restore 612, 618
         }
