@@ -37,7 +37,11 @@
             <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
 
             <script type="text/html" id="currentTableBar">
+                {{# if(d.reviewStatus == "审核中"){ }}
                 <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">审核</a>
+                {{# } else { }}
+                <span class="layui-badge">审核</span>
+                {{# } }}
             </script>
 
         </div>
@@ -50,7 +54,7 @@ layui.use(['form', 'table', 'transfer'], function () {
         var $ = layui.jquery,
             form = layui.form,
         table = layui.table;
-        var transfer = layui.transfer;
+    var transfer = layui.transfer;
 
         table.render({
             elem: '#currentTableId',
@@ -109,7 +113,7 @@ layui.use(['form', 'table', 'transfer'], function () {
                 // UserId赋值用户id，给修改页面调用
                 WorkFlow_InstanceStepId = data.id;
                 var index = layer.open({
-                    title: '编辑用户',
+                    title: '审核',
                     type: 2,
                     shade: 0.2,
                     maxmin: true,

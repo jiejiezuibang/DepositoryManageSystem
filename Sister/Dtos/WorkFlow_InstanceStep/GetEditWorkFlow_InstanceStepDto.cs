@@ -11,5 +11,6 @@ namespace Sister.Dtos.WorkFlow_InstanceStep
         public string ConsumableName { get; set; }
         public int OutNum { get; set; }
         public string Reason { get; set; }
+        public string RoleName { get; set; }
     }
 }

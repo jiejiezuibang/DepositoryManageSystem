@@ -36,16 +36,11 @@
             <script type="text/html" id="toolbarDemo">
                 <div class="layui-btn-container">
                     <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加 </button>
-                    <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除 </button>
                 </div>
             </script>
 
             <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
 
-            <script type="text/html" id="currentTableBar">
-                <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
-                <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
-            </script>
 
         </div>
     </div>
@@ -69,7 +64,6 @@ layui.use(['form', 'table', 'transfer'], function () {
                 icon: 'layui-icon-tips'
             }],
             cols: [[
-                {type: "checkbox", width: 50},
                 { field: 'id', title: 'ID', sort: true,hide: true},
                 { field: 'modelName', title: '模板名称'},
                 { field: 'status', title: '状态'},
@@ -78,7 +72,6 @@ layui.use(['form', 'table', 'transfer'], function () {
                 { field: 'outNum', title: '出库数量'},
                 { field: 'outGoodsName', title: '出库物质名称'},
                 { field: 'createTime',  title: '添加时间'},
-                {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],
             limits: [10, 15, 20, 25, 50, 100],
             page: true,

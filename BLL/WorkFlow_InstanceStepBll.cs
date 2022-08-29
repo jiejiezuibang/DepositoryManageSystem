@@ -150,13 +150,24 @@ namespace BLL
             into dbJoin
             from dData in dbJoin.DefaultIfEmpty()
 
+            join e in _iR_UserInfo_RoleInfoDal.GetAll()  // 连用户角色表
+            on a.ReviewerId equals e.UserId
+            into ecJoin
+            from eData in ecJoin.DefaultIfEmpty()
+
+            join f in _roleInfoDal.GetAll().Where(r => !r.IsDelete) // 连角色表
+            on eData.RoleId equals f.Id
+            into feJoin
+            from fData in feJoin.DefaultIfEmpty()
+
             select new GetEditWorkFlow_InstanceStepDto
             {
                 Id = a.Id,
                 CreatorName = cData.UserName,
                 ConsumableName = dData.ConsumableName,
                 OutNum = bData.OutNum,
-                Reason = bData.Reason
+                Reason = bData.Reason,
+                RoleName = fData.RoleName
             }).FirstOrDefault();
 
         }
