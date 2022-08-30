@@ -64,6 +64,7 @@ namespace BLL
         {
             // 获取要展示的步骤数据
             var data = from a in _workFlow_InstanceStepDal.GetAll()
+                       .OrderByDescending(w => w.CreateTime)
                        .Where(w => w.ReviewerId.Equals(findWorkFlow_InstanceStepDto.UserId)) // 审核人必须等于登录人Id
             join b in _workFlow_InstanceDal.GetAll() // 连实例表
             on a.InstanceId equals b.Id

@@ -169,6 +169,7 @@ namespace BLL
         public List<WorkFlow_InstanceDto> GetShowWorkFlow_InstanceBll(FindWorkFlow_InstanceDto findWorkFlow_InstanceDto, out int Count)
         {
             var workFlow_InstanceDtos = (from a in _workFlow_InstanceDal.GetAll()
+                                         .OrderByDescending(w => w.CreateTime)
                                          .Where(w => w.Creator.Equals(findWorkFlow_InstanceDto.userId))
                                          join b in _workFlow_ModelDal.GetAll()
                                          on a.ModelId equals b.Id

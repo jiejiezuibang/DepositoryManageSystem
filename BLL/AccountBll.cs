@@ -150,6 +150,14 @@ namespace BLL
                         }
                         else
                         {
+                            // 获取用户旧头像名称
+                            string AvatarName = fi.NewFileName;
+                            // 旧头像文件地址
+                            string oldAvatarName = Path.Combine(wwwrootPath, "Avatars", AvatarName);
+                            // 删除旧头像
+                            System.IO.File.Delete(oldAvatarName);
+
+                            // 添加新头像
                             fi.OldFileName = formFile.FileName;
                             fi.NewFileName = newAvatar;
                             fi.Extension = fileExtension;

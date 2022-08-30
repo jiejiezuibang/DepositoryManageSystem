@@ -10,4 +10,3 @@ G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\Sister\obj\Debug\n
 G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\Sister\obj\Debug\netcoreapp3.1\Sister.dll
 G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\Sister\obj\Debug\netcoreapp3.1\Sister.pdb
 G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\Sister\obj\Debug\netcoreapp3.1\Sister.genruntimeconfig.cache
-G:\20级水电.NET开发一班覃坤\实训项目\demo\demo01\Sister\obj\Debug\netcoreapp3.1\Sister.csproj.AssemblyReference.cache

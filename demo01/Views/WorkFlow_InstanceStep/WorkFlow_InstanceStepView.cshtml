@@ -47,98 +47,107 @@
         </div>
     </div>
 
+    <script type="text/html" id="Test">
+        {{#  if(d.reviewStatus === "审核中"){ }}
+        <span style="color:#1E9FFF;">{{ d.reviewStatus }}</span>
+        {{#  } else if(d.reviewStatus === "驳回") { }}
+        <span style="color:red;">{{ d.reviewStatus }}</span>
+        {{#  } else if(d.reviewStatus === "同意") { }}
+        <span style="color: #009688;">{{ d.reviewStatus }}</span>
+        {{#  } }}
+    </script>
 
     <script src="/layuimini/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
     <script>
-layui.use(['form', 'table', 'transfer'], function () {
-        var $ = layui.jquery,
-            form = layui.form,
-        table = layui.table;
-    var transfer = layui.transfer;
+        layui.use(['form', 'table', 'transfer'], function () {
+            var $ = layui.jquery,
+                form = layui.form,
+                table = layui.table;
+            var transfer = layui.transfer;
 
-        table.render({
-            elem: '#currentTableId',
-            url: '/WorkFlow_InstanceStep/GetShowWorkFlow_InstanceStep',
-            toolbar: '#toolbarDemo',
-            defaultToolbar: ['filter', 'exports', 'print', {
-                title: '提示',
-                layEvent: 'LAYTABLE_TIPS',
-                icon: 'layui-icon-tips'
-            }],
-            cols: [[
-                { field: 'id', title: 'ID', sort: true,hide: true},
-                { field: 'title', title: '模板名称'},
-                { field: 'consumableName', title: '耗材名称'},
-                { field: 'creatorName', title: '申请人'},
-                { field: 'reason', title: '申请理由'},
-                { field: 'outNum', title: '申请数量'},
-                { field: 'reviewerName', title: '审核人'},
-                { field: 'reviewStatus', title: '审核状态'},
-                { field: 'reviewTime', title: '审核时间'},
-                { field: 'createTime',  title: '创建时间'},
-                {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
-            ]],
-            limits: [10, 15, 20, 25, 50, 100],
-            page: true,
-            skin: 'line',
-            id: 'currentTableId'
-        });
+            table.render({
+                elem: '#currentTableId',
+                url: '/WorkFlow_InstanceStep/GetShowWorkFlow_InstanceStep',
+                toolbar: '#toolbarDemo',
+                defaultToolbar: ['filter', 'exports', 'print', {
+                    title: '提示',
+                    layEvent: 'LAYTABLE_TIPS',
+                    icon: 'layui-icon-tips'
+                }],
+                cols: [[
+                    { field: 'id', title: 'ID', sort: true, hide: true },
+                    { field: 'title', title: '模板名称' },
+                    { field: 'consumableName', title: '耗材名称' },
+                    { field: 'creatorName', title: '申请人' },
+                    { field: 'reason', title: '申请理由' },
+                    { field: 'outNum', title: '申请数量' },
+                    { field: 'reviewerName', title: '审核人' },
+                    { field: 'reviewStatus', title: '审核状态', templet: "#Test" },
+                    { field: 'reviewTime', title: '审核时间' },
+                    { field: 'createTime', title: '创建时间' },
+                    { title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center" }
+                ]],
+                limits: [10, 15, 20, 25, 50, 100],
+                page: true,
+                skin: 'line',
+                id: 'currentTableId'
+            });
 
 
 
-        // 监听搜索操作
-    form.on('submit(data-search-btn)', function (data) {
-            //执行搜索重载
-            table.reload('currentTableId', {
-                page: {
-                    curr: 1
-                }
-                , where: {
-                    Title: data.field.Title,
+            // 监听搜索操作
+            form.on('submit(data-search-btn)', function (data) {
+                //执行搜索重载
+                table.reload('currentTableId', {
+                    page: {
+                        curr: 1
+                    }
+                    , where: {
+                        Title: data.field.Title,
+                    }
+                });
+
+                return false;
+            });
+
+
+
+            //监听表格复选框选择
+            table.on('checkbox(currentTableFilter)', function (obj) {
+            });
+
+            table.on('tool(currentTableFilter)', function (obj) {
+                var data = obj.data;
+                if (obj.event === 'edit') {
+                    // UserId赋值用户id，给修改页面调用
+                    WorkFlow_InstanceStepId = data.id;
+                    var index = layer.open({
+                        title: '审核',
+                        type: 2,
+                        shade: 0.2,
+                        maxmin: true,
+                        shadeClose: true,
+                        area: ['100%', '100%'],
+                        content: '/WorkFlow_InstanceStep/EditWorkFlow_InstanceStepView',
+                        end: function () { // 回调函数，弹出层销毁后触发
+                            //执行搜索重载
+                            table.reload('currentTableId', {
+                                page: {
+                                    curr: 1
+                                }
+                                , where: {
+                                }
+                            });
+                        }
+                    });
+                    $(window).on("resize", function () {
+                        layer.full(index);
+                    });
+                    return false;
                 }
             });
 
-            return false;
-        });
-
-        
-
-        //监听表格复选框选择
-        table.on('checkbox(currentTableFilter)', function (obj) {
-        });
-
-        table.on('tool(currentTableFilter)', function (obj) {
-            var data = obj.data;
-            if (obj.event === 'edit') {
-                // UserId赋值用户id，给修改页面调用
-                WorkFlow_InstanceStepId = data.id;
-                var index = layer.open({
-                    title: '审核',
-                    type: 2,
-                    shade: 0.2,
-                    maxmin: true,
-                    shadeClose: true,
-                    area: ['100%', '100%'],
-                    content: '/WorkFlow_InstanceStep/EditWorkFlow_InstanceStepView',
-                    end: function () { // 回调函数，弹出层销毁后触发
-                        //执行搜索重载
-                        table.reload('currentTableId', {
-                            page: {
-                                curr: 1
-                            }
-                            , where: {
-                            }
-                        });
-                    }
-                });
-                $(window).on("resize", function () {
-                    layer.full(index);
-                });
-                return false;
-            } 
-        });
-
-    });</script>
+        });</script>
 
 </body>
 </html>
