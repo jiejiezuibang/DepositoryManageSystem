@@ -37,10 +37,10 @@ namespace demo01
             services.AddDbContext<DepositoryContext>(options =>
     options.UseSqlServer(Configuration.GetConnectionString("MvcMovieContext")));
             // 注册全局过滤器（登录校验用）
-            //services.AddMvc(options =>
-            //{
-            //    options.Filters.Add(typeof(LoginFilter));
-            //});
+            services.AddMvc(options =>
+            {
+                options.Filters.Add<LoginFilter>();
+            });
             // 注入仓储层和业务层服务
             AddICustomIOC(services);
         }

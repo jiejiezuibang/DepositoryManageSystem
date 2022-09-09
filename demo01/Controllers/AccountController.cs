@@ -1,4 +1,5 @@
 ﻿using BLL;
+using Common.Attibutes;
 using Common.Filter;
 using Common.ResultEnums;
 using IDepositoryBll;
@@ -30,6 +31,7 @@ namespace DepositoryServer.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Exclude]
         public IActionResult LoginView()
         {
             return View();
@@ -49,6 +51,7 @@ namespace DepositoryServer.Controllers
         /// <param name="password">密码</param>
         /// <returns></returns>
         [HttpPost]
+        [Exclude]
         public IActionResult AccountLogin(string account,string password)
         {
             AjaxResult ajaxResult = new AjaxResult();
